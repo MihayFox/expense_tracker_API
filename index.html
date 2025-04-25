@@ -1,0 +1,219 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="styles.css">
+    <title>Expense Tracker</title>
+</head>
+<body>
+
+    <div class="layout">
+        <aside>
+            <div>
+                <!-- Symbol -->
+                <h2>Fast Budget</h2>
+            </div>
+    
+            <div class="break_line"></div>
+            
+            <div>
+                <!-- Symbol -->
+                <h3>Overview</h3>
+            </div>
+    
+            <div>
+                <!-- Symbol -->
+                <h3>Transactions</h3>
+            </div>
+    
+            <div>
+                <!-- Symbol -->
+                <h3>Scheduled transactions</h3>
+            </div>
+    
+            <div>
+                <!-- Symbol -->
+                <h3>Accounts</h3>
+            </div>
+    
+            <div>
+                <!-- Symbol -->
+                <h3>Credit cards</h3>
+            </div>
+    
+            <div>
+                <!-- Symbol -->
+                <h3>Budgets</h3>
+            </div>
+    
+            <div>
+                <!-- Symbol -->
+                <h3>Debts</h3>
+            </div>
+    
+            <div>
+                <!-- Symbol -->
+                <h3>Charts</h3>
+            </div>
+    
+            <div>
+                <!-- Symbol -->
+                <h3>Calendar</h3>
+            </div>
+    
+            <div class="break_line"></div>
+    
+            <div>
+                <!-- Symbol -->
+                <h3>Import/Export</h3>
+            </div>
+    
+            <div>
+                <!-- Symbol -->
+                <h3>Preferences</h3>
+            </div>
+    
+            <div>
+                <!-- Symbol -->
+                <h3>Bank synchronization</h3>
+            </div>
+    
+            <div class="break_line"></div>
+    
+            <div>
+                <!-- Symbol -->
+                <h3>Settings</h3>
+            </div>
+    
+            <div>
+                <!-- Symbol -->
+                <h3>Help</h3>
+            </div>
+    
+            <div id="dark_btn" class="dark-mode-toggle">
+                <span class="label"><h3>Dark Mode</h3></span>
+                <span class="icon sun">☀️</span>
+                <label class="switch">
+                  <input type="checkbox" id="toggle_checkbox">
+                  <span class="slider round"></span>
+                </label>
+                <span class="icon moon">🌙</span>
+             </div>
+              
+              
+        </aside>
+    
+        <main>
+            <!-- Overview bar -->
+            <top>
+                <h2>Overview</h2>
+            </top>
+            <!------------------>
+
+            <!--------------------- First row ---------------------->
+            <div class="card-container">
+                <!-- Summary Card -->
+                <div class="summary-card card">
+                    <h3 class="section-title">Summary</h3>
+            
+                    <div class="money-row">
+                        <span class="label">Balance:</span>
+                        <span class="value positive">$13,627.71</span>
+                    </div>
+            
+                    <div class="money-row">
+                        <span class="label">Credit cards:</span>
+                        <span class="value negative">-$249.00</span>
+                    </div>
+            
+                    <hr class="divider" />
+            
+                    <div class="money-row total-row">
+                        <span class="label">Total:</span>
+                        <span class="value total">$13,378.71</span>
+                    </div>
+                </div>
+            
+                <!-- This Month Card -->
+                <div class="month-card card">
+                    <h3 class="section-title">This Month</h3>
+            
+                    <div class="money-row">
+                        <span class="label">Income:</span>
+                        <span class="value positive">$4,200.00</span>
+                    </div>
+            
+                    <div class="money-row">
+                        <span class="label">Expenses:</span>
+                        <span class="value negative">-$2,350.00</span>
+                    </div>
+            
+                    <hr class="divider" />
+            
+                    <div class="money-row total-row">
+                        <span class="label">Net:</span>
+                        <span class="value total">$1,850.00</span>
+                    </div>
+                </div>
+            
+                <!-- Last Month Card -->
+                <div class="month-card card">
+                    <h3 class="section-title">Last Month</h3>
+            
+                    <div class="money-row">
+                        <span class="label">Income:</span>
+                        <span class="value positive">$3,800.00</span>
+                    </div>
+            
+                    <div class="money-row">
+                        <span class="label">Expenses:</span>
+                        <span class="value negative">-$2,900.00</span>
+                    </div>
+            
+                    <hr class="divider" />
+            
+                    <div class="money-row total-row">
+                        <span class="label">Net:</span>
+                        <span class="value total">$900.00</span>
+                    </div>
+                </div>
+
+                <!-- Accounts Card -->
+                <div class="accounts-card card">
+                    <h3 class="section-title">Accounts</h3>
+
+                    <div class="account-row">
+                        <span class="label">Wallet</span>
+                    <div class="amount">
+                        <span class="value">430.50</span>
+                        <span class="currency">€</span>
+                    </div>
+                </div>
+                
+                <hr class="divider" />
+
+                <div class="account-row">
+                    <span class="label">Bank Account</span>
+                    <div class="amount">
+                        <span class="value">3,820.25</span>
+                        <span class="currency">€</span>
+                    </div>
+                    </div>
+                </div>
+
+                <!-- Balance Card -->
+                <div class="balance-card card">
+                    <h3 class="section-title">Balance</h3>
+                    <canvas id="balanceChart"></canvas>
+                </div>
+
+            </div>
+
+            <!--------------------------------------------------------->
+
+        </main>
+    </div>
+    
+</body>
+</html>
