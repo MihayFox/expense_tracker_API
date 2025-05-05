@@ -5,7 +5,7 @@ body {
 
 .layout {
     display: flex;
-    height: 100vh;
+    height: 150vh;
     width: 100vw;
 }
 
@@ -67,13 +67,18 @@ top h2 {
     gap: 2rem;
     padding: 2rem;
     flex-wrap: wrap;
+    align-items: flex-start; /* Keep this to prevent height stretching */
 }
 
 .card {
     background-color: white;
     border-radius: 12px;
     padding: 1.5rem;
-    width: 450px; /* ✅ Make cards wider */
+    /* Remove fixed width */
+    /* width: 400px; */
+    /* Use flex to allow items to grow and shrink */
+    /* flex: 1 0 <minimum-width> sets grow, shrink, and a base width */
+    flex: 1 0 300px; /* Example: allows growing, shrinking, with a base of 300px */
     box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
     font-family: Arial, sans-serif;
 }
@@ -117,14 +122,14 @@ top h2 {
     margin: 1rem 0;
 }
 
-/* Make the Accounts card bigger */
+/* Accounts card specific styles */
 .accounts-card {
-    background-color: white;
-    border-radius: 12px;
-    padding: 1.5rem;
-    width: 650px; /* ✅ Make cards wider */
-    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
-    font-family: Arial, sans-serif;
+    /* Remove fixed width */
+    /* width: 650px; */
+    /* Give it a potentially larger flex-basis if you want it to prefer being wider */
+    flex: 1 0 400px; /* Example: allows growing, shrinking, with a base of 400px */
+    /* Inherits other styles like background, padding, etc. from .card */
+    height: auto; /* Ensure height is auto */
 }
 
 /* Align label on left, amount on right */
@@ -155,9 +160,7 @@ top h2 {
     margin-top: 0.2rem;
 }
 
-
-
-
-
-
-/* _______________________________ */
+/* Balance Card */
+.balance-card {
+    height: 400px;
+}
