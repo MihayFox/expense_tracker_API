@@ -1,6 +1,6 @@
 # expense_tracker_API
 
-Build with:
+Built with:
 - React
 - TailWind CSS
 - Node.js
