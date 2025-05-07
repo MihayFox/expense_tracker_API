@@ -1,11 +1,11 @@
-import { useNavigate } from "react-router"
-import { useAuth } from "../context/authContext"
 import { useEffect } from "react"
+import { useAuth } from "../context/AuthContext"
+import { useNavigate } from "react-router"
 
 const Root = () => {
-    const { user } = useAuth()
-    const navigate = useNavigate()
-a
+    const { user } = useAuth();
+    const navigate = useNavigate();
+
     useEffect(() => {
         if (user) {
             if (user.role === "admin") {
@@ -18,7 +18,7 @@ a
         } else {
             navigate("/login")
         }
-    }, [user, navigate]) // whenever user or navigate modify
+    }, [user, navigate])
 
     return null
 }

@@ -1,9 +1,8 @@
-import "./App.css"
+import './App.css'
 import { BrowserRouter as Router, Routes, Route } from "react-router"
-const { Root } = require("./components/Root")
+import Root from "./components/Root"
 
 function App() {
-
   return (
     <Router>
       <Routes>
