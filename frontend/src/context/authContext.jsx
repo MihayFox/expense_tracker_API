@@ -1,4 +1,4 @@
-const { createContext, useState, useContext } = require("react")
+import { createContext, useState, useContext } from "react"
 
 const authContext = createContext()
 
@@ -31,4 +31,5 @@ export const AuthProvider = ({ children }) => {
     )
 }
 
+export const useAuth = () => useContext(authContext)
 export default AuthProvider

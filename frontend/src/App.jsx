@@ -1,16 +1,18 @@
-import './App.css'
-import { BrowserRouter, Routes, Route } from "react-router"
+import "./App.css"
+import { BrowserRouter as Router, Routes, Route } from "react-router"
+const { Root } = require("./components/Root")
 
 function App() {
 
   return (
-    <BrowserRouter>
+    <Router>
       <Routes>
-        <Route path="/" element={<h1>Home</h1>} />
-        <Route path="/about" element={<h1>About</h1>} />
-        <Route path="/contact" element={<h1>Contact</h1>} />
+        <Route path="/" element={<Root />} />
+        <Route path="/admin/dashboard" element={<h1>Admin dashboard</h1>} />
+        <Route path="/user/dashboard" element={<h1>User dashboard</h1>} />
+        <Route path="/login" element={<h1>Login</h1>} />
       </Routes>
-    </BrowserRouter>
+    </Router>
   )
 }
 

@@ -1,12 +1,13 @@
-const { React } = require("react")
-const { ReactDOM } = require("react-dom/client")
-const { App } = require("./App.jsx")
-const { AuthProvider } = require("./context/AuthContext.jsx")
+import { StrictMode } from 'react'
+import { createRoot } from 'react-dom/client'
+import './index.css'
+import App from './App.jsx'
+import AuthProvider from './context/authContext.jsx'
 
-ReactDOM.createRoot(document.getElementById("root")).render(
-    <React.StrictMode>
-        <AuthProvider>
-            <App />
-        </AuthProvider>
-    </React.StrictMode>
+createRoot(document.getElementById('root')).render(
+  <StrictMode>
+    <AuthProvider>
+        <App />
+    </AuthProvider>
+  </StrictMode>,
 )
