@@ -30,9 +30,9 @@ const Login = () => {
             if (response.data.success) {
                 await login(response.data.user, response.data.token)
                 if (response.data.user.role === "admin") {
-                    navigate("/admin/dashboard")
+                    navigate("/admin-dashboard")
                 } else {
-                    navigate("/user/dashboard")
+                    navigate("/user-dashboard")
                 }
             } else {
                 setError(response.data.message || "Login failed. Please check your credentials.");
@@ -40,8 +40,7 @@ const Login = () => {
         } catch (err) {
             console.log(err)
             if (err.response) {
-                // Access the error message from the server response data
-                setError(err.response.data?.message || `Error: ${err.response.status}`);
+                setError(err.response.data?.message || `Error: ${err.response.status}`)
             }
         } finally {
             setLoading(false)

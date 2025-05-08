@@ -8,3 +8,4 @@ Built with:
 
 TODO in the future:
 - protected routes (users can't access admin dashboard)
+- better UI for small screens (phones)
