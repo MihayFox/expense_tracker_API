@@ -5,3 +5,6 @@ Built with:
 - TailWind CSS
 - Node.js
 - MongoDB
+
+TODO in the future:
+- protected routes (users can't access admin dashboard)

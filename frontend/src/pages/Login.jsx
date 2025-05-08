@@ -19,21 +19,30 @@ const Login = () => {
         setError(null)
 
         try {
-            const response = axios.post("https://localhost:3000/api/login", {
-                email, password
-            })
-            if (response.data.status) {
+            const response = await axios.post(
+                "http://localhost:3000/api/auth/login",
+                {
+                    email,
+                    password,
+                }
+            )
+            console.log(response.data)
+            if (response.data.success) {
                 await login(response.data.user, response.data.token)
-                if (response.data.user === "admin") {
+                if (response.data.user.role === "admin") {
                     navigate("/admin/dashboard")
                 } else {
                     navigate("/user/dashboard")
                 }
             } else {
-                alert(response.data.error)
+                setError(response.data.message || "Login failed. Please check your credentials.");
             }
         } catch (err) {
-            setError(err.response.data.message)
+            console.log(err)
+            if (err.response) {
+                // Access the error message from the server response data
+                setError(err.response.data?.message || `Error: ${err.response.status}`);
+            }
         } finally {
             setLoading(false)
         }
@@ -41,11 +50,11 @@ const Login = () => {
 
     return (
         <div className="flex flex-col items-center h-screen justify-center">
-            <h2 className="text-3xl text-black">Inventory Manager</h2>
+            <h2 className="text-3xl text-black">Login page</h2>
             <div className="border shadow-lg p-6 w-80 bg-white">
                 <h2 className="text-2xl font-bold mb-4">Login</h2>
                 {error && (
-                    <div className="bg-red-500 text-red-700 p-2 mb-4 rounded">
+                    <div className="bg-red-200 text-red-700 p-2 mb-4 rounded">
                         {error}
                     </div>
                 )}

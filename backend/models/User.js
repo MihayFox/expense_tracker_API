@@ -1,13 +1,30 @@
-const mongoose = require("mongoose")
-require("dotenv").config()
+const mongoose = require('mongoose')
+const { Schema } = mongoose
 
-const userSchema = new mongoose.Schema({
-    name: {Type: String},
-    email: {Type: String, required: true, unique: true},
-    password: {Type: String, required: true},
-    role: {Type: String, enum:["admin", "user"], default: "user"}
+const userSchema = new Schema({
+    name:
+    {
+        type: String,
+    },
+    email:
+    {
+        type: String,
+        required: true,
+        unique: true,
+    },
+    password:
+    {
+        type: String,
+        required: true,
+    },
+    role:
+    {
+        type: String,
+        enum: ["admin", "user"],
+        default: "user"
+    }
 })
 
-const User = mongoose.model("User", userSchema)
+const name = "users"
 
-export default User
+module.exports = mongoose.models[name] || mongoose.model(name, userSchema)
