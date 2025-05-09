@@ -117,7 +117,7 @@ const Categories = () => {
             <h1 className="text-2xl mb-8">Category Management</h1>
 
             <div className="flex flex-row gap-4">
-                <div className="bg-white shadow-md p-4">
+                <div className="bg-white">
                     <h2 className="text-2xl font-bold">{editCategory ? "Edit category" : "Add category"}</h2>
 
                     {errorMessage &&
@@ -159,7 +159,7 @@ const Categories = () => {
                 </div>
 
                 <div>
-                    <div className="bg-white shadow-md rounded-lg p-4">
+                    <div className="bg-white">
                         <table className="w-full border">
                             <thead>
                                 <tr>
