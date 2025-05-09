@@ -26,8 +26,8 @@ const Categories = () => {
     fetchCategories()
 
     const handleSubmit = async (e) => {
-        e.preventDefault();
-        setErrorMessage(null);
+        e.preventDefault()
+        setErrorMessage(null)
 
         try {
             if (editCategory) {
@@ -85,10 +85,13 @@ const Categories = () => {
         setCategoryDescription(category.description)
     }
 
-    const handleDelete = async (id) => {
+    const handleDelete = async (category) => {
+        if (!window.confirm(`Are you sure you want to delete "${category.name}"? This action cannot be undone.`)) {
+            return
+        }
         try {
             const response = await axios.delete(
-                `http://localhost:3000/api/category/${id}`,
+                `http://localhost:3000/api/category/${category._id}`,
                 {
                     headers: {
                         Authorization: `Bearer ${localStorage.getItem("token")}`,
@@ -183,7 +186,7 @@ const Categories = () => {
                                             </button>
                                             <button
                                                 className="bg-red-500 text-white p-2"
-                                                onClick={() => handleDelete(category._id)}>
+                                                onClick={() => handleDelete(category)}>
                                                 Delete
                                             </button>
                                         </td>
