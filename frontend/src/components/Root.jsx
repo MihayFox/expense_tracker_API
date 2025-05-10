@@ -16,7 +16,7 @@ const Root = () => {
                 navigate("/login")
             }
         } else {
-            navigate("/login")
+            navigate("/homepage")
         }
     }, [user, navigate])
 
