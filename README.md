@@ -7,6 +7,7 @@ Built with:
 - MongoDB
 
 TODO in the future:
-- protected routes (users can't access admin dashboard)
+- auth middleware for protected routes (users can't access admin dashboard)
 - better UI for small screens (phones)
 - keep in database the products that were sold but then deleted from the database
+- password hashing

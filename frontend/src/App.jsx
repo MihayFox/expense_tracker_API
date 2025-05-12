@@ -7,6 +7,7 @@ import Login from "./pages/Login"
 import Dashboard from './pages/Dashboard'
 import Categories from './components/Categories'
 import Products from './components/Products'
+import Settings from './components/Settings'
 import Logout from './components/Logout'
 
 function App() {
@@ -21,7 +22,7 @@ function App() {
           <Route path="products" element={<Products />} />
           <Route path="orders" element={<h1>Orders</h1>} />
           <Route path="users" element={<h1>Users</h1>} />
-          <Route path="settings" element={<h1>Settings</h1>} />
+          <Route path="settings" element={<Settings />} />
           <Route path="logout" element={<Logout />} />
         </Route>
         <Route path="/user-dashboard" element={<h1>User dashboard</h1>} />
