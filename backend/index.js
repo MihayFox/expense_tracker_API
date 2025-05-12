@@ -4,6 +4,7 @@ const mongoose = require('mongoose')
 const authRoutes = require('./Routes/auth.js')
 const categoryRoutes = require("./Routes/categoryRoute.js")
 const productRoutes = require('./Routes/productRoute.js')
+const usersRoutes = require('./Routes/usersRoute.js')
 require('dotenv').config()
 
 const app = express()
@@ -12,6 +13,7 @@ app.use(express.json())
 app.use('/api/auth', authRoutes)
 app.use('/api/category', categoryRoutes)
 app.use('/api/product', productRoutes)
+app.use('/api/users', usersRoutes)
 
 app.listen(process.env.PORT, () => {
     connectDB()

@@ -97,12 +97,6 @@ const Settings = () => {
       if (err.response) {
         setMessage(err.response.data?.message || `Error: ${err.response.status}`)
         setMessageType('error')
-      } else if (err.request) {
-        setMessage('No response received from server.')
-        setMessageType('error')
-      } else {
-        setMessage('An error occurred while setting up the request.')
-        setMessageType('error')
       }
     }
   }
@@ -119,8 +113,8 @@ const Settings = () => {
         <h2 className="text-xl font-semibold mb-4 text-gray-700">Update Your Information</h2>
         {message && (
           <div className={`mt-4 p-3 rounded text-sm ${messageType === 'success' ? 'bg-green-100 text-green-700' :
-              messageType === 'info' ? 'bg-blue-100 text-blue-700' :
-                'bg-red-100 text-red-700'
+            messageType === 'info' ? 'bg-blue-100 text-blue-700' :
+              'bg-red-100 text-red-700'
             }`}>
             {message}
           </div>
@@ -185,7 +179,7 @@ const Settings = () => {
         </form>
       </div>
     </div>
-  );
+  )
 }
 
 export default Settings
