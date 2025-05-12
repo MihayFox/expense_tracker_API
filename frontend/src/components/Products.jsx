@@ -16,14 +16,11 @@ const Products = () => {
 
     const fetchProducts = async () => {
         try {
-            const response = await axios.get(
-                "http://localhost:3000/api/product/get",
-                {
-                    headers: {
-                        Authorization: `Bearer ${localStorage.getItem("token")}`,
-                    },
-                }
-            )
+            const response = await axios.get("http://localhost:3000/api/product/get", {
+                headers: {
+                    Authorization: `Bearer ${localStorage.getItem("token")}`,
+                },
+            })
             if (response.data.success) {
                 setProducts(response.data.products)
                 setCategories(response.data.categories)
@@ -34,16 +31,14 @@ const Products = () => {
             console.log(err)
         }
     }
+
     useEffect(() => {
         fetchProducts()
     }, [])
 
     const handleChange = (e) => {
         const { name, value } = e.target
-        setFormData((prevData) => ({
-            ...prevData,
-            [name]: value,
-        }))
+        setFormData((prev) => ({ ...prev, [name]: value }))
     }
 
     const handleEdit = (product) => {
@@ -59,27 +54,19 @@ const Products = () => {
     }
 
     const handleDelete = async (product) => {
-        if (!window.confirm(`Are you sure you want to delete "${product.name}"? This action cannot be undone.`)) {
-            return
-        }
+        if (!window.confirm(`Delete "${product.name}"?`)) return
         try {
-            const response = await axios.delete(
-                `http://localhost:3000/api/product/${product._id}`,
-                {
-                    headers: {
-                        Authorization: `Bearer ${localStorage.getItem("token")}`,
-                    },
-                }
-            );
-
+            const response = await axios.delete(`http://localhost:3000/api/product/${product._id}`, {
+                headers: { Authorization: `Bearer ${localStorage.getItem("token")}` },
+            })
             if (response.data.success) {
-                alert("Product deleted");
-                fetchProducts();
+                alert("Product deleted")
+                fetchProducts()
             } else {
-                alert("Error deleting product");
+                alert("Error deleting product")
             }
         } catch (err) {
-            alert("Error deleting product");
+            alert("Error deleting product")
         }
     }
 
@@ -97,108 +84,74 @@ const Products = () => {
 
     const handleSubmit = async (e) => {
         e.preventDefault()
+        const url = editProduct
+            ? `http://localhost:3000/api/product/${editProduct}`
+            : "http://localhost:3000/api/product/add"
 
-        if (editProduct) {
-            try {
-                const response = await axios.put(
-                    `http://localhost:3000/api/product/${editProduct}`,
-                    formData,
-                    {
-                        headers: {
-                            Authorization: `Bearer ${localStorage.getItem("token")}`
-                        }
-                    }
-                )
-                if (response.data.success) {
-                    alert("Product updated")
-                    setOpenModal(false)
-                    setEditProduct(null)
-                    setFormData({
-                        name: "",
-                        description: "",
-                        price: "",
-                        stock: "",
-                        categoryID: "",
-                    })
-                    fetchProducts()
-                } else {
-                    alert("Error editing the product")
-                }
-            } catch (err) {
-                alert("Error editing the product")
-            }
-        } else {
+        const method = editProduct ? axios.put : axios.post
 
-            try {
-                const response = await axios.post(
-                    "http://localhost:3000/api/product/add",
-                    formData,
-                    {
-                        headers: {
-                            Authorization: `Bearer ${localStorage.getItem("token")}`
-                        }
-                    }
-                )
-                if (response.data.success) {
-                    alert("Product added")
-                    setOpenModal(false)
-                    setFormData({
-                        name: "",
-                        description: "",
-                        price: "",
-                        stock: "",
-                        categoryID: "",
-                    })
-                    fetchProducts()
-                } else {
-                    alert("Error adding the product")
-                }
-            } catch (err) {
-                alert("Error adding the product")
+        try {
+            const response = await method(url, formData, {
+                headers: { Authorization: `Bearer ${localStorage.getItem("token")}` },
+            })
+
+            if (response.data.success) {
+                alert(editProduct ? "Product updated" : "Product added")
+                closeModal()
+                fetchProducts()
+            } else {
+                alert("Error saving product")
             }
+        } catch (err) {
+            alert("Error saving product")
         }
     }
 
     return (
-        <div>
-            <h1>Products Management</h1>
-            <div>
+        <div className="p-4">
+            <div className="flex justify-between items-center mb-6">
+                <h1 className="text-2xl font-bold">Product Management</h1>
                 <button
-                    className="px-4 py-1.5 bg-blue-500 text-white"
+                    className="bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700"
                     onClick={() => setOpenModal(true)}
-                >Add product</button>
+                >
+                    Add Product
+                </button>
             </div>
-            <div>
-                <table>
-                    <thead>
-                        <tr className="bg-gray-200 border">
-                            <th className="border">Index</th>
-                            <th className="border">Product name</th>
-                            <th className="border">Product description</th>
-                            <th className="border">Category name</th>
-                            <th className="border">Price</th>
-                            <th className="border">Stock</th>
-                            <th className="border">Action</th>
+
+            <div className="overflow-x-auto bg-white shadow rounded-lg">
+                <table className="w-full table-auto">
+                    <thead className="bg-gray-100 text-left">
+                        <tr>
+                            <th className="p-3">#</th>
+                            <th className="p-3">Name</th>
+                            <th className="p-3">Description</th>
+                            <th className="p-3">Category</th>
+                            <th className="p-3">Price</th>
+                            <th className="p-3">Stock</th>
+                            <th className="p-3">Actions</th>
                         </tr>
                     </thead>
                     <tbody>
                         {products.map((product, index) => (
-                            <tr key={product._id}>
-                                <td>{index++}</td>
-                                <td>{product.name}</td>
-                                <td>{product.description}</td>
-                                <td>{product.categoryID.name}</td>
-                                <td>{product.price}</td>
-                                <td>{product.stock}</td>
-                                <td>
+                            <tr key={product._id} className="border-t hover:bg-gray-50">
+                                <td className="p-3">{index + 1}</td>
+                                <td className="p-3">{product.name}</td>
+                                <td className="p-3">{product.description}</td>
+                                <td className="p-3">{product.categoryID.name}</td>
+                                <td className="p-3">${product.price}</td>
+                                <td className="p-3">{product.stock}</td>
+                                <td className="p-3 space-x-2">
                                     <button
-                                        className="bg-blue-500 text-white"
-                                        onClick={() => handleEdit(product)}>
+                                        className="bg-blue-500 text-white px-3 py-1 rounded hover:bg-blue-600"
+                                        onClick={() => handleEdit(product)}
+                                    >
                                         Edit
                                     </button>
                                     <button
-                                        className="bg-red-500 text-white"
-                                        onClick={() => handleDelete(product)}>
+                                        className="bg-red-500 text-white px-3 py-1 rounded hover:bg-red-600"
+                                        onClick={() => handleDelete(product)}
+                                    >
                                         Delete
                                     </button>
                                 </td>
@@ -207,23 +160,26 @@ const Products = () => {
                     </tbody>
                 </table>
             </div>
+
             {openModal && (
-                <div>
-                    <div>
-                        <h1>Add Product</h1>
+                <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50">
+                    <div className="bg-white p-6 rounded-lg w-full max-w-md shadow-lg relative">
+                        <h2 className="text-xl font-semibold mb-4">{editProduct ? "Edit Product" : "Add Product"}</h2>
                         <button
-                            className=""
-                            onClick={closeModal}>
-                            X
+                            onClick={closeModal}
+                            className="absolute top-2 right-3 text-gray-500 hover:text-red-500 text-lg"
+                        >
+                            &times
                         </button>
-                        <form className="flex flex-col gap-4 mt-4" onSubmit={handleSubmit}>
+                        <form onSubmit={handleSubmit} className="space-y-4">
                             <input
                                 type="text"
                                 name="name"
                                 value={formData.name}
                                 onChange={handleChange}
                                 placeholder="Product name"
-                                className="border p-1 bg-white px-4"
+                                className="w-full p-2 border rounded"
+                                required
                             />
                             <input
                                 type="text"
@@ -231,50 +187,53 @@ const Products = () => {
                                 value={formData.description}
                                 onChange={handleChange}
                                 placeholder="Product description"
-                                className="border p-1 bg-white px-4"
+                                className="w-full p-2 border rounded"
+                                required
                             />
                             <input
                                 type="number"
                                 name="price"
                                 value={formData.price}
                                 onChange={handleChange}
-                                placeholder="Enter price"
-                                className="border p-1 bg-white px-4"
+                                placeholder="Price"
+                                className="w-full p-2 border rounded"
+                                required
                             />
                             <input
                                 type="number"
                                 name="stock"
                                 value={formData.stock}
                                 onChange={handleChange}
-                                placeholder="Enter stock"
-                                className="border p-1 bg-white px-4"
+                                placeholder="Stock"
+                                className="w-full p-2 border rounded"
+                                required
                             />
-
-                            <div className="w-full border">
-                                <select
-                                    name="categoryID"
-                                    className="w-full p-2"
-                                    onChange={handleChange}
-                                    value={formData.categoryID}>
-                                    <option value="">Select category</option>
-                                    {categories && categories.map((category) => (
-                                        <option key={category._id} value={category._id}>
-                                            {category.name}
-                                        </option>
-                                    ))}
-                                </select>
-                            </div>
-
+                            <select
+                                name="categoryID"
+                                value={formData.categoryID}
+                                onChange={handleChange}
+                                className="w-full p-2 border rounded"
+                                required
+                            >
+                                <option value="">Select Category</option>
+                                {categories.map((cat) => (
+                                    <option key={cat._id} value={cat._id}>
+                                        {cat.name}
+                                    </option>
+                                ))}
+                            </select>
                             <div className="flex space-x-2">
                                 <button
                                     type="submit"
-                                    className="w-full bg-green-500 text-white">
-                                    {editProduct ? "Save changes" : "Add product"}
+                                    className="bg-green-600 text-white px-4 py-2 rounded hover:bg-green-700 flex-1"
+                                >
+                                    {editProduct ? "Save Changes" : "Add Product"}
                                 </button>
                                 <button
                                     type="button"
-                                    className="w-full bg-red-500 text-white"
-                                    onClick={closeModal}>
+                                    onClick={closeModal}
+                                    className="bg-gray-400 text-white px-4 py-2 rounded hover:bg-gray-500 flex-1"
+                                >
                                     Cancel
                                 </button>
                             </div>
