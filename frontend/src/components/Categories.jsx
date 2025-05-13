@@ -100,47 +100,54 @@ const Categories = () => {
     }
 
     return (
-        <div className="p-6 max-w-7xl mx-auto">
-            <h1 className="text-3xl font-bold mb-6 text-gray-800">Category Management</h1>
-
-            <div className="grid md:grid-cols-2 gap-8">
-                <div className="bg-white shadow-md p-6 rounded-lg">
-                    <h2 className="text-xl font-semibold mb-4 text-gray-700">
-                        {editCategory ? "Edit Category" : "Add Category"}
+        <div className="p-4 max-w-4xl mx-auto">
+            <h1 className="text-2xl font-bold mb-6 text-gray-800">Category Management</h1>
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                <div className="bg-white shadow p-4 rounded border border-gray-300">
+                    <h2 className="text-xl font-semibold mb-4 text-gray-700 text-center">
+                        {editCategory ? "Edit Category" : "Add New Category"}
                     </h2>
-
                     {errorMessage && (
-                        <div className="text-red-600 text-sm mb-4">
+                        <div className="bg-red-200 border border-red-500 text-red-800 px-3 py-2 rounded mb-3 text-sm">
                             {errorMessage}
                         </div>
                     )}
+                    <form onSubmit={handleSubmit} className="space-y-3">
+                        <div>
+                            <label htmlFor="categoryName" className="block text-gray-700 text-sm font-medium mb-1">Category Name</label>
+                            <input
+                                type="text"
+                                id="categoryName"
+                                placeholder="Enter Category Name"
+                                className="w-full border border-gray-400 rounded p-2"
+                                value={categoryName}
+                                onChange={(e) => setCategoryName(e.target.value)}
+                                required
+                            />
+                        </div>
 
-                    <form onSubmit={handleSubmit} className="space-y-4">
-                        <input
-                            type="text"
-                            placeholder="Category Name"
-                            className="w-full border rounded-md p-2"
-                            value={categoryName}
-                            onChange={(e) => setCategoryName(e.target.value)}
-                        />
-                        <input
-                            type="text"
-                            placeholder="Category Description"
-                            className="w-full border rounded-md p-2"
-                            value={categoryDescription}
-                            onChange={(e) => setCategoryDescription(e.target.value)}
-                        />
-                        <div className="flex gap-3">
+                        <div>
+                            <label htmlFor="categoryDescription" className="block text-gray-700 text-sm font-medium mb-1">Description</label>
+                            <textarea
+                                id="categoryDescription"
+                                placeholder="Enter Category Description"
+                                className="w-full border border-gray-400 rounded p-2 h-20"
+                                value={categoryDescription}
+                                onChange={(e) => setCategoryDescription(e.target.value)}
+                                required
+                            ></textarea>
+                        </div>
+                        <div className="flex gap-2 mt-4">
                             <button
                                 type="submit"
-                                className="bg-green-600 hover:bg-green-700 text-white px-4 py-2 rounded-md transition"
+                                className="flex-1 bg-green-500 hover:bg-green-600 text-white font-bold px-3 py-2 rounded"
                             >
                                 {editCategory ? "Save Changes" : "Add Category"}
                             </button>
                             {editCategory && (
                                 <button
                                     type="button"
-                                    className="bg-gray-300 hover:bg-gray-400 text-black px-4 py-2 rounded-md transition"
+                                    className="flex-1 bg-gray-500 hover:bg-gray-600 text-white font-bold px-3 py-2 rounded"
                                     onClick={handleCancel}
                                 >
                                     Cancel
@@ -149,43 +156,44 @@ const Categories = () => {
                         </div>
                     </form>
                 </div>
-
-                <div className="bg-white shadow-md p-6 rounded-lg overflow-x-auto">
-                    <h2 className="text-xl font-semibold mb-4 text-gray-700">Category List</h2>
-                    <table className="min-w-full table-auto border">
-                        <thead className="bg-gray-100">
-                            <tr>
-                                <th className="p-2 border">#</th>
-                                <th className="p-2 border">Name</th>
-                                <th className="p-2 border">Description</th>
-                                <th className="p-2 border">Actions</th>
+                <div className="bg-white shadow p-4 rounded border border-gray-300">
+                    <h2 className="text-xl font-semibold mb-4 text-gray-700 text-center">Category List</h2>
+                    <table className="min-w-full bg-white border-collapse border border-gray-300">
+                        <thead>
+                            <tr className="bg-gray-200 text-gray-600 text-sm leading-normal">
+                                <th className="py-2 px-4 text-left border border-gray-300">#</th>
+                                <th className="py-2 px-4 text-left border border-gray-300">Name</th>
+                                <th className="py-2 px-4 text-left border border-gray-300">Description</th>
+                                <th className="py-2 px-4 text-center border border-gray-300">Actions</th>
                             </tr>
                         </thead>
-                        <tbody>
+                        <tbody className="text-gray-600 text-sm">
                             {categories.map((category, index) => (
-                                <tr key={category._id} className="text-center">
-                                    <td className="p-2 border">{index + 1}</td>
-                                    <td className="p-2 border">{category.name}</td>
-                                    <td className="p-2 border">{category.description}</td>
-                                    <td className="p-2 border space-x-2">
-                                        <button
-                                            className="bg-blue-500 hover:bg-blue-600 text-white px-3 py-1 rounded-md transition"
-                                            onClick={() => handleEdit(category)}
-                                        >
-                                            Edit
-                                        </button>
-                                        <button
-                                            className="bg-red-500 hover:bg-red-600 text-white px-3 py-1 rounded-md transition"
-                                            onClick={() => handleDelete(category)}
-                                        >
-                                            Delete
-                                        </button>
+                                <tr key={category._id} className="border-b border-gray-300">
+                                    <td className="py-2 px-4 text-left whitespace-nowrap border border-gray-300">{index + 1}</td>
+                                    <td className="py-2 px-4 text-left border border-gray-300">{category.name}</td>
+                                    <td className="py-2 px-4 text-left border border-gray-300">{category.description}</td>
+                                    <td className="py-2 px-4 text-center border border-gray-300">
+                                        <div className="flex items-center justify-center space-x-2">
+                                            <button
+                                                className="bg-blue-500 text-white font-semibold px-4 py-2 rounded hover:bg-blue-600"
+                                                onClick={() => handleEdit(category)}
+                                            >
+                                                Edit
+                                            </button>
+                                            <button
+                                                className="bg-red-500 hover:bg-red-600 text-white font-semibold px-4 py-2 rounded"
+                                                onClick={() => handleDelete(category)}
+                                            >
+                                                Delete
+                                            </button>
+                                        </div>
                                     </td>
                                 </tr>
                             ))}
                             {categories.length === 0 && (
                                 <tr>
-                                    <td colSpan="4" className="p-4 text-gray-500 text-center">
+                                    <td colSpan="4" className="py-3 text-gray-500 text-center border border-gray-300">
                                         No categories found.
                                     </td>
                                 </tr>

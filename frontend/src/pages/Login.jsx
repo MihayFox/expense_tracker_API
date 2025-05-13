@@ -12,7 +12,6 @@ const Login = () => {
 
     const { login } = useAuth()
 
-
     const handleSubmit = async (e) => {
         e.preventDefault()
         setLoading(true)
@@ -26,7 +25,6 @@ const Login = () => {
                     password,
                 }
             )
-            console.log(response.data)
             if (response.data.success) {
                 await login(response.data.user, response.data.token)
                 if (response.data.user.role === "admin") {
@@ -35,12 +33,16 @@ const Login = () => {
                     navigate("/user-dashboard")
                 }
             } else {
-                setError(response.data.message || "Login failed. Please check your credentials.");
+                setError(
+                    response.data.message ||
+                    "Login failed. Please check your credentials."
+                )
             }
         } catch (err) {
-            console.log(err)
             if (err.response) {
                 setError(err.response.data?.message || `Error: ${err.response.status}`)
+            } else {
+                setError("An unexpected error occurred.")
             }
         } finally {
             setLoading(false)
@@ -48,45 +50,71 @@ const Login = () => {
     }
 
     return (
-        <div className="flex flex-col items-center h-screen justify-center">
-            <h2 className="text-3xl text-black">Login page</h2>
-            <div className="border shadow-lg p-6 w-80 bg-white">
-                <h2 className="text-2xl font-bold mb-4">Login</h2>
-                {error && (
-                    <div className="bg-red-200 text-red-700 p-2 mb-4 rounded">
-                        {error}
-                    </div>
-                )}
+        < div className="flex items-center justify-center h-screen bg-gray-100" >
+            < div className="bg-white p-6 rounded shadow max-w-sm mx-auto border border-gray-300" >
+                <h2 className="text-2xl font-bold mb-4 text-center text-gray-800">
+                    Login
+                </h2>
+                {
+                    error && (
+                        <div className="mb-3 p-3 rounded text-sm bg-red-200 text-red-800 border border-red-500">
+                            {error}
+                        </div>
+                    )
+                }
                 <form onSubmit={handleSubmit}>
-                    <div className="mb-4">
-                        <label className="block text-gray-700">Email</label>
+                    <div className="mb-3">
+                        <label
+                            htmlFor="email"
+                            className="block text-gray-700 text-sm font-medium mb-1"
+                        >
+                            Email Address
+                        </label>
                         <input
                             type="email"
-                            className="w-full px-3 py-2 border"
-                            name="email"
+                            id="email"
+                            className="border border-gray-400 rounded w-full py-2 px-3 text-gray-700"
                             placeholder="Enter Email"
                             required
                             onChange={(e) => setEmail(e.target.value)}
                         />
                     </div>
                     <div className="mb-4">
-                        <label className="block text-gray-700">Password</label>
-                        <input type="password"
-                            className="w-full px-3 py-2 border"
-                            name="password"
+                        <label
+                            htmlFor="password"
+                            className="block text-gray-700 text-sm font-medium mb-1"
+                        >
+                            Password
+                        </label>
+                        <input
+                            type="password"
+                            id="password"
+                            className="border border-gray-400 rounded w-full py-2 px-3 text-gray-700"
                             placeholder="Enter Password"
                             required
                             onChange={(e) => setPassword(e.target.value)}
                         />
                     </div>
-                    <button
-                        type="submit"
-                        className="w-full bg-blue-400 text-white py-1">
-                        {loading ? "Loading... " : "Login"}
-                    </button>
+                    <div className="flex items-center gap-2">
+                        <button
+                            type="submit"
+                            className={`bg-blue-500 hover:bg-blue-600 text-white font-bold py-2 px-4 rounded ${loading ? "opacity-50 cursor-not-allowed" : ""
+                                }`}
+                            disabled={loading}
+                        >
+                            {loading ? "Logging In..." : "Login"}
+                        </button>
+                        <button
+                            type="button"
+                            onClick={() => navigate("/signup")}
+                            className="font-bold text-sm text-blue-600"
+                        >
+                            Don't have an account? Sign Up
+                        </button>
+                    </div>
                 </form>
-            </div>
-        </div>
+            </div >
+        </div >
     )
 }
 

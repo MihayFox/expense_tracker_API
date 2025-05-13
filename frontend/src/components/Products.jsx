@@ -108,52 +108,54 @@ const Products = () => {
     }
 
     return (
-        <div className="p-4">
+        <div className="p-4 max-w-4xl mx-auto">
             <div className="flex justify-between items-center mb-6">
-                <h1 className="text-2xl font-bold">Product Management</h1>
+                <h1 className="text-2xl font-bold text-gray-800">Product Management</h1>
                 <button
-                    className="bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700"
+                    className="bg-blue-500 text-white font-semibold px-4 py-2 rounded hover:bg-blue-600"
                     onClick={() => setOpenModal(true)}
                 >
                     Add Product
                 </button>
             </div>
 
-            <div className="overflow-x-auto bg-white shadow rounded-lg">
-                <table className="w-full table-auto">
-                    <thead className="bg-gray-100 text-left">
-                        <tr>
-                            <th className="p-3">#</th>
-                            <th className="p-3">Name</th>
-                            <th className="p-3">Description</th>
-                            <th className="p-3">Category</th>
-                            <th className="p-3">Price</th>
-                            <th className="p-3">Stock</th>
-                            <th className="p-3">Actions</th>
+            <div className="bg-white shadow rounded overflow-x-auto border border-gray-300">
+                <table className="min-w-full bg-white border-collapse border border-gray-300">
+                    <thead>
+                        <tr className="bg-gray-200 text-gray-600 text-sm">
+                            <th className="py-2 px-4 text-left border border-gray-300">#</th>
+                            <th className="py-2 px-4 text-left border border-gray-300">Name</th>
+                            <th className="py-2 px-4 text-left border border-gray-300">Description</th>
+                            <th className="py-2 px-4 text-left border border-gray-300">Category</th>
+                            <th className="py-2 px-4 text-left border border-gray-300">Price</th>
+                            <th className="py-2 px-4 text-left border border-gray-300">Stock</th>
+                            <th className="py-2 px-4 text-center border border-gray-300">Actions</th>
                         </tr>
                     </thead>
-                    <tbody>
+                    <tbody className="text-gray-600 text-sm">
                         {products.map((product, index) => (
-                            <tr key={product._id} className="border-t hover:bg-gray-50">
-                                <td className="p-3">{index + 1}</td>
-                                <td className="p-3">{product.name}</td>
-                                <td className="p-3">{product.description}</td>
-                                <td className="p-3">{product.categoryID.name}</td>
-                                <td className="p-3">${product.price}</td>
-                                <td className="p-3">{product.stock}</td>
-                                <td className="p-3 space-x-2">
-                                    <button
-                                        className="bg-blue-500 text-white px-3 py-1 rounded hover:bg-blue-600"
-                                        onClick={() => handleEdit(product)}
-                                    >
-                                        Edit
-                                    </button>
-                                    <button
-                                        className="bg-red-500 text-white px-3 py-1 rounded hover:bg-red-600"
-                                        onClick={() => handleDelete(product)}
-                                    >
-                                        Delete
-                                    </button>
+                            <tr key={product._id} className="border-b border-gray-300">
+                                <td className="py-2 px-4 text-left border border-gray-300">{index + 1}</td>
+                                <td className="py-2 px-4 text-left border border-gray-300">{product.name}</td>
+                                <td className="py-2 px-4 text-left border border-gray-300">{product.description}</td>
+                                <td className="py-2 px-4 text-left border border-gray-300">{product.categoryID?.name || 'N/A'}</td>
+                                <td className="py-2 px-4 text-left border border-gray-300">${product.price.toFixed(2)}</td>
+                                <td className="py-2 px-4 text-left border border-gray-300">{product.stock}</td>
+                                <td className="py-2 px-4 text-center border border-gray-300">
+                                    <div className="flex items-center justify-center space-x-2">
+                                        <button
+                                            className="bg-blue-500 text-white font-semibold px-4 py-2 rounded hover:bg-blue-600"
+                                            onClick={() => handleEdit(product)}
+                                        >
+                                            Edit
+                                        </button>
+                                        <button
+                                            className="bg-red-500 text-white font-semibold px-4 py-2 rounded hover:bg-red-600"
+                                            onClick={() => handleDelete(product)}
+                                        >
+                                            Delete
+                                        </button>
+                                    </div>
                                 </td>
                             </tr>
                         ))}
@@ -162,77 +164,101 @@ const Products = () => {
             </div>
 
             {openModal && (
-                <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50">
-                    <div className="bg-white p-6 rounded-lg w-full max-w-md shadow-lg relative">
-                        <h2 className="text-xl font-semibold mb-4">{editProduct ? "Edit Product" : "Add Product"}</h2>
+                <div className="fixed inset-0 bg-gray-500 bg-opacity-75 flex items-center justify-center p-4">
+                    <div className="bg-white p-6 rounded shadow-lg w-full max-w-md relative border border-gray-300">
+                        <h2 className="text-xl font-bold mb-4 text-gray-800 text-center">{editProduct ? "Edit Product" : "Add New Product"}</h2>
                         <button
                             onClick={closeModal}
-                            className="absolute top-2 right-3 text-gray-500 hover:text-red-500 text-lg"
+                            className="absolute top-2 right-2 text-gray-600 text-2xl"
                         >
-                            &times
+                            X
                         </button>
-                        <form onSubmit={handleSubmit} className="space-y-4">
-                            <input
-                                type="text"
-                                name="name"
-                                value={formData.name}
-                                onChange={handleChange}
-                                placeholder="Product name"
-                                className="w-full p-2 border rounded"
-                                required
-                            />
-                            <input
-                                type="text"
-                                name="description"
-                                value={formData.description}
-                                onChange={handleChange}
-                                placeholder="Product description"
-                                className="w-full p-2 border rounded"
-                                required
-                            />
-                            <input
-                                type="number"
-                                name="price"
-                                value={formData.price}
-                                onChange={handleChange}
-                                placeholder="Price"
-                                className="w-full p-2 border rounded"
-                                required
-                            />
-                            <input
-                                type="number"
-                                name="stock"
-                                value={formData.stock}
-                                onChange={handleChange}
-                                placeholder="Stock"
-                                className="w-full p-2 border rounded"
-                                required
-                            />
-                            <select
-                                name="categoryID"
-                                value={formData.categoryID}
-                                onChange={handleChange}
-                                className="w-full p-2 border rounded"
-                                required
-                            >
-                                <option value="">Select Category</option>
-                                {categories.map((cat) => (
-                                    <option key={cat._id} value={cat._id}>
-                                        {cat.name}
-                                    </option>
-                                ))}
-                            </select>
-                            <div className="flex space-x-2">
+                        <form onSubmit={handleSubmit} className="space-y-3">
+                            <div>
+                                <label htmlFor="productName" className="block text-gray-700 text-sm font-medium mb-1">Product Name</label>
+                                <input
+                                    type="text"
+                                    id="productName"
+                                    name="name"
+                                    value={formData.name}
+                                    onChange={handleChange}
+                                    placeholder="Enter Product Name"
+                                    className="w-full border border-gray-400 rounded p-2"
+                                    required
+                                />
+                            </div>
+
+                            <div>
+                                <label htmlFor="productDescription" className="block text-gray-700 text-sm font-medium mb-1">Description</label>
+                                <textarea
+                                    id="productDescription"
+                                    name="description"
+                                    value={formData.description}
+                                    onChange={handleChange}
+                                    placeholder="Enter Product Description"
+                                    className="w-full border border-gray-400 rounded p-2 h-20"
+                                    required
+                                ></textarea>
+                            </div>
+
+                            <div>
+                                <label htmlFor="productPrice" className="block text-gray-700 text-sm font-medium mb-1">Price</label>
+                                <input
+                                    type="number"
+                                    id="productPrice"
+                                    name="price"
+                                    value={formData.price}
+                                    onChange={handleChange}
+                                    placeholder="Enter Price"
+                                    className="w-full border border-gray-400 rounded p-2"
+                                    required
+                                />
+                            </div>
+
+                            <div>
+                                <label htmlFor="productStock" className="block text-gray-700 text-sm font-medium mb-1">Stock</label>
+                                <input
+                                    type="number"
+                                    id="productStock"
+                                    name="stock"
+                                    value={formData.stock}
+                                    onChange={handleChange}
+                                    placeholder="Enter Stock Quantity"
+                                    className="w-full border border-gray-400 rounded p-2"
+                                    required
+                                />
+                            </div>
+
+                            <div>
+                                <label htmlFor="productCategory" className="block text-gray-700 text-sm font-medium mb-1">Category</label>
+                                <select
+                                    id="productCategory"
+                                    name="categoryID"
+                                    value={formData.categoryID}
+                                    onChange={handleChange}
+                                    className="w-full border border-gray-400 rounded p-2 bg-white"
+                                    required
+                                >
+                                    <option value="">Select Category</option>
+                                    {categories.map((cat) => (
+                                        <option key={cat._id} value={cat._id}>
+                                            {cat.name}
+                                        </option>
+                                    ))}
+                                </select>
+                            </div>
+
+                            <div className="flex gap-2 mt-4">
                                 <button
                                     type="submit"
-                                    className="bg-green-600 text-white px-4 py-2 rounded hover:bg-green-700 flex-1"
+                                    className="flex-1 bg-green-500 hover:bg-green-600 text-white font-bold px-3 py-2 rounded"
                                 >
                                     {editProduct ? "Save Changes" : "Add Product"}
                                 </button>
                                 <button
                                     type="button"
                                     onClick={closeModal}
-                                    className="bg-gray-400 text-white px-4 py-2 rounded hover:bg-gray-500 flex-1"
+                                    className="flex-1 bg-gray-500 hover:bg-gray-600 text-white font-bold px-3 py-2 rounded"
                                 >
                                     Cancel
                                 </button>

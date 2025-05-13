@@ -1,60 +1,71 @@
 import React from 'react'
+import { NavLink } from 'react-router'
 
 const Sidebar = () => {
     const menuItems = [
         {
             name: "Dashboard",
             path: "/admin-dashboard",
-            icon: "",
+            icon: "📊",
         },
         {
             name: "Categories",
             path: "/admin-dashboard/categories",
-            icon: "",
+            icon: "📂",
         },
         {
             name: "Products",
             path: "/admin-dashboard/products",
-            icon: "",
+            icon: "📦",
         },
         {
             name: "Orders",
             path: "/admin-dashboard/orders",
-            icon: "",
+            icon: "📋",
         },
         {
             name: "Active users",
             path: "/admin-dashboard/users",
-            icon: "",
+            icon: "👥",
         },
         {
             name: "Settings",
             path: "/admin-dashboard/settings",
-            icon: "",
+            icon: "⚙️",
         },
         {
             name: "Logout",
             path: "/admin-dashboard/logout",
-            icon: "",
+            icon: "➡️",
         },
     ]
 
     return (
-        <div className="flex flex-col h-screen p-3 bg-black text-white w-16 md:w-64 shadow-lg fixed">
-            <div className="h-16 flex flex-items justify-center">
-                <span className="hidden md:block text-xl font-bold">Inventory Management System</span> {/* big screen */}
+        <div className="flex flex-col h-screen p-4 bg-gray-800 text-white md:w-64 fixed">
+            <div className="flex items-center justify-center h-12 mb-4 border-b border-gray-700 pb-3">
+                <span className="block text-lg font-bold text-blue-400">
+                    Admin Panel
+                </span>
             </div>
-            
-            <div>
-                <ul className="space-y-2 p-2">
+            <nav className="flex-grow">
+                <ul className="space-y-2">
                     {menuItems.map((item) => (
                         <li key={item.name}>
-                            <span className="text-xl flex items-center p-2 text-white rounded-lg group">{item.icon}</span>
-                            <a href={item.path} className="ml-3 flex items-center p-2 text-white rounded-lg group hover:bg-gray-600">{item.name}</a>
+                            <NavLink
+                                to={item.path}
+                                className="flex items-center py-2 px-2 text-white rounded hover:bg-gray-700"
+                            >
+                                <span className="text-base">
+                                    {item.icon}
+                                </span>
+                                <span className="ml-2 text-sm font-medium">
+                                    {item.name}
+                                </span>
+                            </NavLink>
                         </li>
                     ))}
                 </ul>
-            </div>
+            </nav>
         </div>
     )
 }

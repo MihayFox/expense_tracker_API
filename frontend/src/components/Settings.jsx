@@ -106,34 +106,29 @@ const Settings = () => {
   }
 
   return (
-    <div className="p-6 max-w-7xl mx-auto">
-      <h1 className="text-3xl font-bold mb-6 text-gray-800">Account Settings</h1>
-
-      <div className="bg-white shadow-md p-6 rounded-lg max-w-lg mx-auto">
+    <div className="p-4 max-w-md mx-auto">
+      <h1 className="text-2xl font-bold mb-6 text-gray-800 text-center">Account Settings</h1>
+      <div className="bg-white shadow p-4 rounded border border-gray-300">
         <h2 className="text-xl font-semibold mb-4 text-gray-700">Update Your Information</h2>
         {message && (
-          <div className={`mt-4 p-3 rounded text-sm ${messageType === 'success' ? 'bg-green-100 text-green-700' :
-            messageType === 'info' ? 'bg-blue-100 text-blue-700' :
-              'bg-red-100 text-red-700'
-            }`}>
+          <div className="p-3 rounded text-sm bg-red-200 text-red-800 border border-red-500">
             {message}
           </div>
         )}
-
-        <form onSubmit={handleSubmit} className="mt-6 space-y-4">
+        <form onSubmit={handleSubmit} className="mt-4 space-y-3">
           <div>
-            <label htmlFor="name" className="block text-sm font-medium text-gray-700 mb-1">Name</label> {/* Added mb-1 for spacing */}
+            <label htmlFor="name" className="block text-sm font-medium text-gray-700 mb-1">Name</label>
             <input
               type="text"
               id="name"
               name="name"
               value={formData.name}
               onChange={handleInputChange}
-              className="w-full border rounded-md p-2 text-gray-700"
+              className="w-full border border-gray-400 rounded p-2 text-gray-700"
             />
           </div>
           <div>
-            <label htmlFor="email" className="block text-sm font-medium text-gray-700 mb-1">Email Address</label> {/* Added mb-1 */}
+            <label htmlFor="email" className="block text-sm font-medium text-gray-700 mb-1">Email Address</label>
             <input
               type="email"
               id="email"
@@ -141,7 +136,7 @@ const Settings = () => {
               value={formData.email}
               onChange={handleInputChange}
               required
-              className="w-full border rounded-md p-2 text-gray-700"
+              className="w-full border border-gray-400 rounded p-2 text-gray-700"
             />
           </div>
           <div>
@@ -153,7 +148,7 @@ const Settings = () => {
               value={formData.currentPassword}
               onChange={handleInputChange}
               required
-              className="w-full border rounded-md p-2 text-gray-700"
+              className="w-full border border-gray-400 rounded p-2 text-gray-700"
             />
           </div>
 
@@ -165,13 +160,13 @@ const Settings = () => {
               name="password"
               value={formData.password}
               onChange={handleInputChange}
-              className="w-full border rounded-md p-2 text-gray-700"
+              className="w-full border border-gray-400 rounded p-2 text-gray-700"
             />
           </div>
           <div className="flex justify-end">
             <button
               type="submit"
-              className="bg-green-600 hover:bg-green-700 text-white px-4 py-2 rounded-md transition"
+              className="bg-green-500 hover:bg-green-600 text-white px-3 py-2 rounded"
             >
               Save Changes
             </button>

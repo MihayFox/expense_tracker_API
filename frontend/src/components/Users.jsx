@@ -103,27 +103,24 @@ const Users = () => {
     }
 
     return (
-        <div className="p-6 max-w-7xl mx-auto">
-            <h1 className="text-3xl font-bold mb-6 text-gray-800">User Management</h1>
-
-            <div className="grid md:grid-cols-2 gap-8">
-                <div className="bg-white shadow-md p-6 rounded-lg">
+        <div className="p-4 max-w-4xl mx-auto">
+            <h1 className="text-2xl font-bold mb-6 text-gray-800">User Management</h1>
+            <div className="grid md:grid-cols-2 gap-4">
+                <div className="bg-white shadow p-4 rounded border border-gray-300">
                     <h2 className="text-xl font-semibold mb-4 text-gray-700">
                         Add New User
                     </h2>
-
                     {errorMessage && (
-                        <div className="text-red-600 text-sm mb-4">
+                        <div className="text-red-600 text-sm mb-3">
                             {errorMessage}
                         </div>
                     )}
-
-                    <form onSubmit={handleAddUser} className="space-y-4">
+                    <form onSubmit={handleAddUser} className="space-y-3">
                         <input
                             type="text"
                             name="name"
                             placeholder="Name"
-                            className="w-full border rounded-md p-2"
+                            className="w-full border border-gray-400 rounded p-2"
                             value={formData.name}
                             onChange={handleInputChange}
                             required
@@ -132,7 +129,7 @@ const Users = () => {
                             type="email"
                             name="email"
                             placeholder="Email"
-                            className="w-full border rounded-md p-2"
+                            className="w-full border border-gray-400 rounded p-2"
                             value={formData.email}
                             onChange={handleInputChange}
                             required
@@ -141,14 +138,14 @@ const Users = () => {
                             type="password"
                             name="password"
                             placeholder="Password"
-                            className="w-full border rounded-md p-2"
+                            className="w-full border border-gray-400 rounded p-2"
                             value={formData.password}
                             onChange={handleInputChange}
                             required
                         />
                         <select
                             name="role"
-                            className="w-full border rounded-md p-2"
+                            className="w-full border border-gray-400 rounded p-2 bg-white"
                             value={formData.role}
                             onChange={handleInputChange}
                             required
@@ -160,56 +157,47 @@ const Users = () => {
                         <div className="flex">
                             <button
                                 type="submit"
-                                className="bg-green-600 hover:bg-green-700 text-white px-4 py-2 rounded-md transition"
+                                className="bg-green-500 hover:bg-green-600 text-white px-3 py-2 rounded"
                             >
                                 Add User
                             </button>
                         </div>
                     </form>
                 </div>
-
-                <div className="bg-white shadow-md p-6 rounded-lg overflow-x-auto">
+                <div className="bg-white shadow p-4 rounded border border-gray-300">
                     <h2 className="text-xl font-semibold mb-4 text-gray-700">User List</h2>
                     {errorMessage && users.length === 0 && (
-                        <div className="text-red-600 text-sm mb-4">
+                        <div className="text-red-600 text-sm mb-3">
                             {errorMessage}
                         </div>
                     )}
-                    <table className="min-w-full table-auto border">
-                        <thead className="bg-gray-100">
+                    <table className="min-w-full table-auto border border-gray-300">
+                        <thead className="bg-gray-200">
                             <tr>
-                                <th className="p-2 border text-left">ID</th>
-                                <th className="p-2 border text-left">Name</th>
-                                <th className="p-2 border text-left">Email</th>
-                                <th className="p-2 border text-left">Role</th>
-                                <th className="p-2 border text-center">Action</th>
+                                <th className="p-2 border border-gray-300 text-left">#</th>
+                                <th className="p-2 border border-gray-300 text-left">Name</th>
+                                <th className="p-2 border border-gray-300 text-left">Email</th>
+                                <th className="p-2 border border-gray-300 text-left">Role</th>
+                                <th className="p-2 border border-gray-300 text-left">Action</th>
                             </tr>
                         </thead>
                         <tbody>
-                            {users.length > 0 ? (
-                                users.map((user, index) => (
-                                    <tr key={user._id} className="text-left">
-                                        <td className="p-2 border">{index++}</td>
-                                        <td className="p-2 border">{user.name}</td>
-                                        <td className="p-2 border">{user.email}</td>
-                                        <td className="p-2 border">{user.role}</td>
-                                        <td className="p-2 border text-center">
-                                            <button
-                                                className="bg-red-500 hover:bg-red-600 text-white px-3 py-1 rounded-md transition"
-                                                onClick={() => handleDeleteUser(user)}
-                                            >
-                                                Delete
-                                            </button>
-                                        </td>
-                                    </tr>
-                                ))
-                            ) : (
-                                <tr>
-                                    <td colSpan="5" className="p-4 text-gray-500 text-center">
-                                        No users found.
+                            {users.map((user, index) => (
+                                <tr key={user._id} className="text-left border-b border-gray-300">
+                                    <td className="p-2 border border-gray-300">{index + 1}</td>
+                                    <td className="p-2 border border-gray-300">{user.name}</td>
+                                    <td className="p-2 border border-gray-300">{user.email}</td>
+                                    <td className="p-2 border border-gray-300">{user.role}</td>
+                                    <td className="p-2 border border-gray-300 text-center">
+                                        <button
+                                            className="bg-red-500 hover:bg-red-600 text-white px-2 py-1 rounded text-sm"
+                                            onClick={() => handleDeleteUser(user)}
+                                        >
+                                            Delete
+                                        </button>
                                     </td>
                                 </tr>
-                            )}
+                            ))}
                         </tbody>
                     </table>
                 </div>

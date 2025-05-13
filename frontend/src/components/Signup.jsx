@@ -1,3 +1,4 @@
+// Signup.jsx
 import { useState } from "react"
 import { useNavigate } from "react-router"
 import axios from "axios"
@@ -37,8 +38,6 @@ const Signup = () => {
                 }
             )
 
-            console.log(response.data)
-
             if (response.data.success) {
                 alert("Signup successful! Please login.")
                 navigate("/login")
@@ -46,7 +45,6 @@ const Signup = () => {
                 setError(response.data.message || "Signup failed. Please try again.")
             }
         } catch (err) {
-            console.log(err)
             if (err.response) {
                 setError(err.response.data?.message || `Error: ${err.response.status}`)
             } else {
@@ -58,46 +56,62 @@ const Signup = () => {
     }
 
     return (
-        <div className="flex flex-col items-center h-screen justify-center">
-            <h2 className="text-3xl text-gray-800">Sign Up Page</h2>
-            <div className="border p-6 w-80 bg-white">
-                <h2 className="text-2xl font-bold text-gray-800">Sign Up</h2>
+        <div className="flex items-center justify-center h-screen bg-gray-100">
+            <div className="bg-white p-6 rounded shadow max-w-sm mx-auto border border-gray-300">
+                <h2 className="text-2xl font-bold mb-4 text-center text-gray-800">
+                    Sign Up
+                </h2>
                 {error && (
-                    <div className="bg-red-200 text-red-700 p-2 mb-4 rounded">
+                    <div className="mb-3 p-3 rounded text-sm bg-red-200 text-red-800 border border-red-500">
                         {error}
                     </div>
                 )}
                 <form onSubmit={handleSubmit}>
-                    <div className="mb-4">
-                        <label className="block text-gray-700 font-bold mb-1">Name</label>
+                    <div className="mb-3">
+                        <label
+                            htmlFor="name"
+                            className="block text-gray-700 text-sm font-medium mb-1"
+                        >
+                            Full Name
+                        </label>
                         <input
                             type="text"
-                            className="border w-full text-gray-700 p-2 rounded"
-                            name="name"
-                            placeholder="Enter Name"
+                            id="name"
+                            className="border border-gray-400 rounded w-full py-2 px-3 text-gray-700"
+                            placeholder="Enter Your Name"
                             required
                             value={name}
                             onChange={(e) => setName(e.target.value)}
                         />
                     </div>
-                    <div className="mb-4">
-                        <label className="block text-gray-700 font-bold mb-1">Email</label>
+                    <div className="mb-3">
+                        <label
+                            htmlFor="email"
+                            className="block text-gray-700 text-sm font-medium mb-1"
+                        >
+                            Email Address
+                        </label>
                         <input
                             type="email"
-                            className="border w-full text-gray-700 p-2 rounded"
-                            name="email"
+                            id="email"
+                            className="border border-gray-400 rounded w-full py-2 px-3 text-gray-700"
                             placeholder="Enter Email"
                             required
                             value={email}
                             onChange={(e) => setEmail(e.target.value)}
                         />
                     </div>
-                    <div className="mb-4">
-                        <label className="block text-gray-700 font-bold mb-1">Password</label>
+                    <div className="mb-3">
+                        <label
+                            htmlFor="password"
+                            className="block text-gray-700 text-sm font-medium mb-1"
+                        >
+                            Password
+                        </label>
                         <input
                             type="password"
-                            className="border w-full text-gray-700 p-2 rounded"
-                            name="password"
+                            id="password"
+                            className="border border-gray-400 rounded w-full py-2 px-3 text-gray-700"
                             placeholder="Enter Password"
                             required
                             value={password}
@@ -105,24 +119,38 @@ const Signup = () => {
                         />
                     </div>
                     <div className="mb-4">
-                        <label className="block text-gray-700 font-bold mb-1">Confirm Password</label>
+                        <label
+                            htmlFor="confirmPassword"
+                            className="block text-gray-700 text-sm font-medium mb-1"
+                        >
+                            Confirm Password
+                        </label>
                         <input
                             type="password"
-                            className="border w-full text-gray-700 p-2 rounded"
-                            name="confirmPassword"
+                            id="confirmPassword"
+                            className="border border-gray-400 rounded w-full py-2 px-3 text-gray-700"
                             placeholder="Confirm Password"
                             required
                             value={confirmPassword}
                             onChange={(e) => setConfirmPassword(e.target.value)}
                         />
                     </div>
-                    <div className="flex items-center justify-between">
+                    <div className="flex items-center gap-7">
                         <button
                             type="submit"
-                            className={`bg-blue-500 text-white font-bold w-full py-2 px-4 rounded transition duration-200 ${loading ? 'opacity-50 cursor-not-allowed' : 'hover:bg-blue-700'}`} // Added styling and loading state
+                            className={`bg-blue-500 hover:bg-blue-600 text-white font-bold py-2 px-4 rounded ${
+                                loading ? "opacity-50 cursor-not-allowed" : ""
+                            }`}
                             disabled={loading}
                         >
                             {loading ? "Signing Up..." : "Sign Up"}
+                        </button>
+                        <button
+                            type="button"
+                            onClick={() => navigate("/login")}
+                            className="font-bold text-sm text-blue-600"
+                        >
+                            Already have an account? Login
                         </button>
                     </div>
                 </form>
