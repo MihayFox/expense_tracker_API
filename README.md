@@ -11,3 +11,4 @@ TODO in the future:
 - better UI for small screens (phones)
 - keep in database the products that were sold but then deleted from the database
 - password hashing
+- auto updating stock after order set on shipped
