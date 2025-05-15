@@ -5,6 +5,7 @@ const authRoutes = require('./Routes/auth.js')
 const categoryRoutes = require("./Routes/categoryRoute.js")
 const productRoutes = require('./Routes/productRoute.js')
 const usersRoutes = require('./Routes/usersRoute.js')
+const orderRoutes = require('./routes/orderRoute')
 require('dotenv').config()
 
 const app = express()
@@ -14,6 +15,7 @@ app.use('/api/auth', authRoutes)
 app.use('/api/category', categoryRoutes)
 app.use('/api/product', productRoutes)
 app.use('/api/users', usersRoutes)
+app.use('/api/orders', orderRoutes)
 
 app.listen(process.env.PORT, () => {
     connectDB()

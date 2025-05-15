@@ -5,7 +5,15 @@ const AuthContext = createContext()
 export const AuthProvider = ({ children }) => {
     const [user, setUser] = useState(() => {
         const storedUser = localStorage.getItem("user")
-        return storedUser ? JSON.parse(storedUser) : null
+        try {
+            const parsedUser = storedUser ? JSON.parse(storedUser) : null
+            return parsedUser
+        } catch (e) {
+            console.error("Error parsing user from localStorage:", e)
+            localStorage.removeItem("user")
+            localStorage.removeItem("token")
+            return null
+        }
     })
 
     const login = (userData, token) => {
@@ -15,7 +23,9 @@ export const AuthProvider = ({ children }) => {
     }
 
     const logout = () => {
-        setUser(null)
+        if (user.role === 'user') {
+            localStorage.removeItem("cart")
+        }
         localStorage.removeItem("user")
         localStorage.removeItem("token")
     }

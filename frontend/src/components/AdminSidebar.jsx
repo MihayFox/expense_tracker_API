@@ -1,7 +1,7 @@
 import React from 'react'
-import { NavLink } from 'react-router'
+import { NavLink } from 'react-router-dom'
 
-const Sidebar = () => {
+const AdminSidebar = () => {
     const menuItems = [
         {
             name: "Dashboard",
@@ -70,4 +70,4 @@ const Sidebar = () => {
     )
 }
 
-export default Sidebar
+export default AdminSidebar

@@ -1,35 +1,70 @@
 import './App.css'
-import { BrowserRouter as Router, Routes, Route } from "react-router"
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom'
 import Root from "./components/Root"
-import Homepage from "./components/Homepage"
-import Signup from "./components/Signup"
+import Homepage from "./pages/Homepage"
+import Signup from "./pages/Signup"
 import Login from "./pages/Login"
-import Dashboard from './pages/Dashboard'
-import Categories from './components/Categories'
-import Products from './components/Products'
-import Users from './components/Users'
-import Settings from './components/Settings'
-import Logout from './components/Logout'
+
+// Admin pages
+import AdminDashboard from './pages/admin/AdminDashboard'
+import AdminCategories from './pages/admin/AdminCategories'
+import AdminProducts from './pages/admin/AdminProducts'
+import AdminOrders from './pages/admin/AdminOrders'
+import AdminUsers from './pages/admin/AdminUsers'
+import AdminSettings from './pages/admin/AdminSettings'
+
+// User pages
+import UserDashboard from './pages/user/UserDashboard'
+import UserProducts from './pages/user/UserProducts'
+import UserOrders from './pages/user/UserOrders'
+import UserProfile from './pages/user/UserSettings'
+import UserCart from './pages/user/UserCart'
+
+// Contexts
+import { AuthProvider } from './context/authContext'
+import { CartProvider } from './context/cartContext'
+
+// Common pages
+import Logout from './components/common/Logout'
 
 function App() {
   return (
     <Router>
-      <Routes>
-        <Route path="/" element={<Root />} />
-        <Route path="/homepage" element={<Homepage />} />
-        <Route path="/admin-dashboard" element={<Dashboard />}>
-          <Route index element={<h1>Summary of dashboard</h1>} />
-          <Route path="categories" element={<Categories />} />
-          <Route path="products" element={<Products />} />
-          <Route path="orders" element={<h1>Orders</h1>} />
-          <Route path="users" element={<Users />} />
-          <Route path="settings" element={<Settings />} />
-          <Route path="logout" element={<Logout />} />
-        </Route>
-        <Route path="/user-dashboard" element={<h1>User dashboard</h1>} />
-        <Route path="/login" element={<Login />} />
-        <Route path="/signup" element={<Signup />} />
-      </Routes>
+      <AuthProvider>
+        <Routes>
+          <Route path="/" element={<Root />} />
+          <Route path="/homepage" element={<Homepage />} />
+          <Route path="/admin-dashboard" element={<AdminDashboard />}>
+            <Route index element={<h1>Admin Dashboard Summary</h1>} />
+            <Route path="categories" element={<AdminCategories />} />
+            <Route path="products" element={<AdminProducts />} />
+            <Route path="orders" element={<AdminOrders />} />
+            <Route path="users" element={<AdminUsers />} />
+            <Route path="settings" element={<AdminSettings />} />
+            <Route path="logout" element={<Logout />} />
+          </Route>
+
+          <Route
+              path="/user-dashboard/*"
+              element={
+                  <CartProvider>
+                      <UserDashboard />
+                  </CartProvider>
+              }
+          >
+             <Route index element={<h1>User Dashboard Welcome</h1>} />
+             <Route path="products" element={<UserProducts />} />
+             <Route path="orders" element={<UserOrders />} />
+             <Route path="profile" element={<UserProfile />} />
+             <Route path="cart" element={<UserCart />} />
+             <Route path="logout" element={<Logout />} />
+          </Route>
+
+          <Route path="/login" element={<Login />} />
+          <Route path="/signup" element={<Signup />} />
+          
+        </Routes>
+      </AuthProvider>
     </Router>
   )
 }
