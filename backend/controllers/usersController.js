@@ -5,7 +5,7 @@ const addUser = async (req, res) => {
         const { name, email, password, role } = req.body
 
         if (!name || !email || !password || !role) {
-             return res.status(400).json({ success: false, message: "Please provide name, email, password, and role" })
+            return res.status(400).json({ success: false, message: "Please provide name, email, password, and role" })
         }
 
         const existingUser = await User.findOne({ email })
@@ -30,8 +30,8 @@ const addUser = async (req, res) => {
     } catch (err) {
         console.error("Error adding user:", err)
         if (err.name === 'ValidationError') {
-             const messages = Object.values(err.errors).map(val => val.message)
-             return res.status(400).json({ success: false, message: messages.join(', ') })
+            const messages = Object.values(err.errors).map(val => val.message)
+            return res.status(400).json({ success: false, message: messages.join(', ') })
         }
         return res.status(500).json({ success: false, message: "Error adding user" })
     }

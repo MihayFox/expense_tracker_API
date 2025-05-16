@@ -1,5 +1,4 @@
-
-import React, { createContext, useState, useEffect } from 'react';
+import React, { createContext, useState, useEffect } from 'react'
 
 export const CartContext = createContext()
 
@@ -26,7 +25,7 @@ export const CartProvider = ({ children }) => {
     }
 
     const removeItem = (productId) => {
-         setCartItems(cartItems.filter(item => item.product._id !== productId));
+        setCartItems(cartItems.filter(item => item.product._id !== productId));
     }
 
     const updateItemQuantity = (productId, newQuantity) => {
@@ -41,15 +40,15 @@ export const CartProvider = ({ children }) => {
     }
 
     const clearCart = () => {
-        setCartItems([]);
+        setCartItems([])
     }
 
     const getTotalItems = () => {
-        return cartItems.reduce((total, item) => total + item.quantity, 0);
+        return cartItems.reduce((total, item) => total + item.quantity, 0)
     }
 
     const getTotalPrice = () => {
-         return cartItems.reduce((total, item) => total + (item.product.price * item.quantity), 0);
+        return cartItems.reduce((total, item) => total + (item.product.price * item.quantity), 0)
     }
 
     return (

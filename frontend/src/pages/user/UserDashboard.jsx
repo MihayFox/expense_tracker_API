@@ -10,7 +10,7 @@ const UserDashboard = () => {
                 <Outlet />
             </div>
         </div>
-    );
+    )
 }
 
 export default UserDashboard

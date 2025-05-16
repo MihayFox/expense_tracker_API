@@ -6,7 +6,7 @@ const AdminOrders = () => {
     const [error, setError] = useState(null)
     const [updateError, setUpdateError] = useState(null)
 
-    // Define possible order statuses
+    // Possible order statuses
     const possibleStatuses = ['Pending', 'Processing', 'Shipped', 'Delivered', 'Cancelled'];
 
     const fetchOrders = async () => {

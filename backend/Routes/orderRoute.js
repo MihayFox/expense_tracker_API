@@ -8,5 +8,4 @@ router.get('/admin', getOrdersAdmin)
 router.get('/user/:userId', getOrdersUser)
 router.patch('/:orderId', updateOrderStatus)
 
-
 module.exports = router

@@ -1,4 +1,3 @@
-// Signup.jsx
 import { useState } from "react"
 import { useNavigate } from "react-router"
 import axios from "axios"
@@ -138,9 +137,8 @@ const Signup = () => {
                     <div className="flex items-center gap-7">
                         <button
                             type="submit"
-                            className={`bg-blue-500 hover:bg-blue-600 text-white font-bold py-2 px-4 rounded ${
-                                loading ? "opacity-50 cursor-not-allowed" : ""
-                            }`}
+                            className={`bg-blue-500 hover:bg-blue-600 text-white font-bold py-2 px-4 rounded ${loading ? "opacity-50 cursor-not-allowed" : ""
+                                }`}
                             disabled={loading}
                         >
                             {loading ? "Signing Up..." : "Sign Up"}

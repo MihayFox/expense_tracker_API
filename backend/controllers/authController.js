@@ -58,7 +58,7 @@ const updateUser = async (req, res) => {
         const { currentEmail, currentPassword, name, email, password } = req.body
 
         if (!currentEmail || !currentPassword) {
-             return res.status(400).json({ success: false, message: "Current email and password are required to update settings." })
+            return res.status(400).json({ success: false, message: "Current email and password are required to update settings." })
         }
         const user = await User.findOne({ email: currentEmail })
 
@@ -66,7 +66,7 @@ const updateUser = async (req, res) => {
             return res.status(404).json({ success: false, message: "User not found with provided email." })
         }
         if (currentPassword !== user.password) {
-             return res.status(401).json({ success: false, message: "Invalid current password." })
+            return res.status(401).json({ success: false, message: "Invalid current password." })
         }
         if (name !== undefined && name !== user.name) {
             user.name = name
@@ -82,7 +82,7 @@ const updateUser = async (req, res) => {
             user.password = password
         }
         if (user.isModified()) {
-             await user.save()
+            await user.save()
         }
         return res.status(200).json({
             success: true,

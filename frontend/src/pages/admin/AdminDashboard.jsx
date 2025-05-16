@@ -11,7 +11,7 @@ const AdminDashboard = () => {
                 <Outlet />
             </div>
         </div>
-    );
+    )
 }
 
 export default AdminDashboard
