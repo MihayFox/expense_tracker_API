@@ -6,7 +6,8 @@ import Signup from "./pages/Signup"
 import Login from "./pages/Login"
 
 // Admin pages
-import AdminDashboard from './pages/admin/AdminDashboard'
+import AdminDashboard from './pages/admin/AdminDashboard' // This is the layout
+import AdminDashboardSummary from './pages/admin/AdminDashboardSummary' // This is the chart content
 import AdminCategories from './pages/admin/AdminCategories'
 import AdminProducts from './pages/admin/AdminProducts'
 import AdminOrders from './pages/admin/AdminOrders'
@@ -27,6 +28,7 @@ import { CartProvider } from './context/cartContext'
 // Common pages
 import Logout from './components/common/Logout'
 
+
 function App() {
   return (
     <Router>
@@ -35,7 +37,7 @@ function App() {
           <Route path="/" element={<Root />} />
           <Route path="/homepage" element={<Homepage />} />
           <Route path="/admin-dashboard" element={<AdminDashboard />}>
-            <Route index element={<h1>Admin Dashboard Summary</h1>} />
+            <Route index element={<AdminDashboardSummary />} /> {/* this will render when the user goes to /admin-dashboard | child route*/}
             <Route path="categories" element={<AdminCategories />} />
             <Route path="products" element={<AdminProducts />} />
             <Route path="orders" element={<AdminOrders />} />
@@ -45,24 +47,25 @@ function App() {
           </Route>
 
           <Route
-              path="/user-dashboard/*"
-              element={
-                  <CartProvider>
-                      <UserDashboard />
-                  </CartProvider>
-              }
+            path="/user-dashboard/*"
+            element={
+              <CartProvider>
+                <UserDashboard />
+              </CartProvider>
+            }
           >
-             <Route index element={<h1>User Dashboard Welcome</h1>} />
-             <Route path="products" element={<UserProducts />} />
-             <Route path="orders" element={<UserOrders />} />
-             <Route path="profile" element={<UserProfile />} />
-             <Route path="cart" element={<UserCart />} />
-             <Route path="logout" element={<Logout />} />
+            <Route index element={<h1>User Dashboard Welcome</h1>} />
+            <Route path="products" element={<UserProducts />} />
+            <Route path="orders" element={<UserOrders />} />
+            <Route path="profile" element={<UserProfile />} />
+            <Route path="cart" element={<UserCart />} />
+            <Route path="logout" element={<Logout />} />
           </Route>
+
 
           <Route path="/login" element={<Login />} />
           <Route path="/signup" element={<Signup />} />
-          
+
         </Routes>
       </AuthProvider>
     </Router>

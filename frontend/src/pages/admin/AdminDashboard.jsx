@@ -1,13 +1,13 @@
-import React from 'react';
-import { Outlet } from 'react-router'
+import React from 'react'
+import { Outlet } from 'react-router-dom'
 import AdminSidebar from '../../components/AdminSidebar'
 
 const AdminDashboard = () => {
     return (
-        <div className="flex">
+        <div>
             <AdminSidebar />
 
-            <div className="flex-1 ml-64 p-6">
+            <div className="ml-64">
                 <Outlet />
             </div>
         </div>
