@@ -4,8 +4,8 @@ import ProfitChart from '../../components/ProfitChart'
 
 const AdminDashboardSummary = () => {
     const [orders, setOrders] = useState([])
-    // const [error, setError] = useState(null) // error showing after 1-2 seconds, not looking good
-    const [view, setView] = useState('monthly') // monthly or annually
+    // const [error, setError] = useState(null) // Error showing after 1-2 seconds, not looking good
+    const [view, setView] = useState('monthly') // "monthly" or "annually"
     const [chartData, setChartData] = useState({})
 
     useEffect(() => {
@@ -15,7 +15,7 @@ const AdminDashboardSummary = () => {
                 setOrders(response.data.orders)
             } catch (err) {
                 // setError("Failed to fetch orders") // error showing after 1-2 seconds, not looking good
-                setOrders([]) // behave like no orders found
+                setOrders([]) // Behave like no orders found
             }
         }
 
@@ -28,24 +28,25 @@ const AdminDashboardSummary = () => {
     }, [orders, view])
 
     const processOrderData = (ordersToProcess, currentView) => {
+        // Filter the orders to only find the ones that generated profit
         const profitOrders = ordersToProcess.filter(order => order.status === 'Delivered' || order.status === 'Processing')
 
-        const data = {}
+        const data = {} // The total profit
 
         profitOrders.forEach(order => {
             const date = new Date(order.orderDate)
-            let key
+            let key // Time period string
 
-            if (currentView === 'monthly') {
+            if (currentView === 'monthly') { // Format: YYYY-MM
                 key = `${date.getFullYear()}-${(date.getMonth() + 1).toString().padStart(2, '0')}`
                 // date.getMonth() + 1 because indexing starts from 0
                 // .padStart(2, '0') - adds '0' at the start of the string if it isn't 2 characters long
-            } else {
+            } else { // Format: YYYY
                 key = date.getFullYear().toString()
             }
 
             if (!data[key]) {
-                data[key] = 0
+                data[key] = 0 // First order for this time period
             }
             data[key] += order.totalAmount
         })
@@ -60,7 +61,7 @@ const AdminDashboardSummary = () => {
         return formattedData
     }
 
-    // this shows after 1-2 seconds, not looking good
+    // This shows after 1-2 seconds, not looking good
     // if (error) {
     //     return <div className="text-center text-xl py-10 text-red-500">{error}</div>
     // }
