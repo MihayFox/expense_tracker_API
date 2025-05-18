@@ -18,12 +18,10 @@ const UserCart = () => {
 
 
     const navigate = useNavigate()
-    const [placingOrder, setPlacingOrder] = useState(false)
     const [orderError, setOrderError] = useState(null)
     const [orderSuccess, setOrderSuccess] = useState(false)
 
     const handlePlaceOrder = async () => {
-        setPlacingOrder(true)
         setOrderError(null)
         setOrderSuccess(false)
 
@@ -47,7 +45,6 @@ const UserCart = () => {
 
             if (response.data.success) {
                 setOrderSuccess(true)
-                setPlacingOrder(false)
                 clearCart()
 
                 alert('Order placed successfully!')
@@ -55,13 +52,11 @@ const UserCart = () => {
 
             } else {
                 setOrderError(response.data.message || 'Failed to place order')
-                setPlacingOrder(false)
             }
 
         } catch (err) {
             console.error("Error placing order:", err)
             setOrderError('Failed to place order. Please try again.')
-            setPlacingOrder(false)
             if (err.response && err.response.data && err.response.data.message) {
                 setOrderError(err.response.data.message)
             } else if (err.request) {
@@ -93,7 +88,7 @@ const UserCart = () => {
                                 <div className="flex items-center mx-4">
                                     <button
                                         onClick={() => updateItemQuantity(item.product._id, item.quantity - 1)}
-                                        className="bg-gray-300 text-gray-700 px-2 py-1 rounded-l hover:bg-gray-400"
+                                        className="cursor-pointer bg-gray-300 text-gray-700 px-2 py-1 rounded-l hover:bg-gray-400"
                                         disabled={item.quantity <= 1}
                                     >
                                         -
@@ -107,7 +102,7 @@ const UserCart = () => {
                                     />
                                     <button
                                         onClick={() => updateItemQuantity(item.product._id, item.quantity + 1)}
-                                        className="bg-gray-300 text-gray-700 px-2 py-1 rounded-r hover:bg-gray-400"
+                                        className="cursor-pointer bg-gray-300 text-gray-700 px-2 py-1 rounded-r hover:bg-gray-400"
                                     >
                                         +
                                     </button>
@@ -119,7 +114,7 @@ const UserCart = () => {
 
                                 <button
                                     onClick={() => removeItem(item.product._id)}
-                                    className="text-red-600 hover:text-red-800"
+                                    className="cursor-pointer text-red-600 hover:text-red-800"
                                 >
                                     Remove
                                 </button>
@@ -137,8 +132,7 @@ const UserCart = () => {
 
                         <button
                             onClick={handlePlaceOrder}
-                            className={`bg-green-500 text-white py-2 px-6 rounded-lg text-lg font-semibold transition duration-200
-                                       ${placingOrder ? 'opacity-50 cursor-not-allowed' : 'hover:bg-green-600'}`}
+                            className="cursor-pointer bg-green-500 text-white py-2 px-6 rounded-lg text-lg font-semibold"
                         >
                             Place Order
                         </button>

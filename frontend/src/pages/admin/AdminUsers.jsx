@@ -157,7 +157,7 @@ const Users = () => {
                         <div className="flex">
                             <button
                                 type="submit"
-                                className="bg-green-500 hover:bg-green-600 text-white px-3 py-2 rounded"
+                                className="cursor-pointer bg-green-500 hover:bg-green-600 text-white px-3 py-2 rounded"
                             >
                                 Add User
                             </button>
@@ -190,7 +190,7 @@ const Users = () => {
                                     <td className="p-2 border border-gray-300">{user.role}</td>
                                     <td className="p-2 border border-gray-300 text-center">
                                         <button
-                                            className="bg-red-500 hover:bg-red-600 text-white px-2 py-1 rounded text-sm"
+                                            className="cursor-pointer bg-red-500 hover:bg-red-600 text-white px-2 py-1 rounded text-sm"
                                             onClick={() => handleDeleteUser(user)}
                                         >
                                             Delete

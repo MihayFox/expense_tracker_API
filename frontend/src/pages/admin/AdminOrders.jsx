@@ -125,7 +125,7 @@ const AdminOrders = () => {
                                         <select
                                             value={order.status}
                                             onChange={(e) => handleStatusChange(order._id, e.target.value)}
-                                            className={`p-1 rounded-md text-xs font-semibold border
+                                            className={`cursor-pointer p-1 rounded-md text-xs font-semibold border
                                                 ${order.status === 'Delivered' ? 'bg-green-200 text-green-800 border-green-300' :
                                                     order.status === 'Cancelled' ? 'bg-red-200 text-red-800 border-red-300' :
                                                         'bg-yellow-200 text-yellow-800 border-yellow-300'}`}

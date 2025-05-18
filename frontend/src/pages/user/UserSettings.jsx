@@ -15,7 +15,6 @@ const UserSettings = () => {
 
   const [message, setMessage] = useState('')
   const [messageType, setMessageType] = useState('') // 'success', 'error', 'info'
-  const [isSaving, setIsSaving] = useState(false)
   const [error, setError] = useState(null)
 
   useEffect(() => {
@@ -68,12 +67,10 @@ const UserSettings = () => {
     e.preventDefault()
     setMessage('')
     setMessageType('')
-    setIsSaving(true)
 
     if (!formData.currentPassword) {
       setMessage('Please enter your current password to save changes.')
       setMessageType('error')
-      setIsSaving(false)
       return
     }
 
@@ -96,7 +93,6 @@ const UserSettings = () => {
       setMessage('No changes detected.')
       setMessageType('info')
       setFormData({ ...formData, password: '', currentPassword: '' })
-      setIsSaving(false)
       return
     }
 
@@ -134,9 +130,6 @@ const UserSettings = () => {
         setMessage('An unexpected error occurred. Please try again.')
       }
       setMessageType('error')
-
-    } finally {
-      setIsSaving(false)
     }
   }
 
@@ -215,11 +208,9 @@ const UserSettings = () => {
           <div className="flex justify-end">
             <button
               type="submit"
-              className={`bg-green-500 hover:bg-green-600 text-white px-4 py-2 rounded transition duration-200
-                          ${isSaving ? 'opacity-50 cursor-not-allowed' : ''}`}
-              disabled={isSaving}
+              className="cursor-pointer bg-green-500 hover:bg-green-600 text-white px-4 py-2 rounded"
             >
-              {isSaving ? 'Saving Changes...' : 'Save Changes'}
+              Save changes
             </button>
           </div>
         </form>

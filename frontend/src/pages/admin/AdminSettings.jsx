@@ -166,7 +166,7 @@ const Settings = () => {
           <div className="flex justify-end">
             <button
               type="submit"
-              className="bg-green-500 hover:bg-green-600 text-white px-3 py-2 rounded"
+              className="cursor-pointer bg-green-500 hover:bg-green-600 text-white px-3 py-2 rounded"
             >
               Save Changes
             </button>

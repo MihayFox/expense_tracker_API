@@ -73,7 +73,9 @@ const Categories = () => {
     }
 
     const handleDelete = async (category) => {
-        if (!window.confirm(`Are you sure you want to delete "${category.name}"?`)) return
+        if (!window.confirm(`Are you sure you want to delete "${category.name}"?`)) {
+            return
+        }
 
         try {
             const response = await axios.delete(
@@ -102,8 +104,8 @@ const Categories = () => {
     return (
         <div className="p-4 max-w-4xl mx-auto">
             <h1 className="text-2xl font-bold mb-6 text-gray-800">Category Management</h1>
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                <div className="bg-white shadow p-4 rounded border border-gray-300">
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+                <div className="bg-white shadow p-4 rounded border border-gray-300 md:col-span-1">
                     <h2 className="text-xl font-semibold mb-4 text-gray-700 text-center">
                         {editCategory ? "Edit Category" : "Add New Category"}
                     </h2>
@@ -125,7 +127,7 @@ const Categories = () => {
                                 required
                             />
                         </div>
-
+                        
                         <div>
                             <label htmlFor="categoryDescription" className="block text-gray-700 text-sm font-medium mb-1">Description</label>
                             <textarea
@@ -140,14 +142,14 @@ const Categories = () => {
                         <div className="flex gap-2 mt-4">
                             <button
                                 type="submit"
-                                className="flex-1 bg-green-500 hover:bg-green-600 text-white font-bold px-3 py-2 rounded"
+                                className="cursor-pointer flex-1 bg-green-500 hover:bg-green-600 text-white font-bold px-3 py-2 rounded"
                             >
                                 {editCategory ? "Save Changes" : "Add Category"}
                             </button>
                             {editCategory && (
                                 <button
                                     type="button"
-                                    className="flex-1 bg-gray-500 hover:bg-gray-600 text-white font-bold px-3 py-2 rounded"
+                                    className="cursor-pointer flex-1 bg-gray-500 hover:bg-gray-600 text-white font-bold px-3 py-2 rounded"
                                     onClick={handleCancel}
                                 >
                                     Cancel
@@ -156,8 +158,10 @@ const Categories = () => {
                         </div>
                     </form>
                 </div>
-                <div className="bg-white shadow p-4 rounded border border-gray-300">
+                {/* Table container */}
+                <div className="bg-white shadow p-4 rounded border border-gray-300 md:col-span-2">
                     <h2 className="text-xl font-semibold mb-4 text-gray-700 text-center">Category List</h2>
+                    {/* The actual table */}
                     <table className="min-w-full bg-white border-collapse border border-gray-300">
                         <thead>
                             <tr className="bg-gray-200 text-gray-600 text-sm leading-normal">
@@ -175,14 +179,13 @@ const Categories = () => {
                                     <td className="py-2 px-4 text-left border border-gray-300">{category.description}</td>
                                     <td className="py-2 px-4 text-center border border-gray-300">
                                         <div className="flex items-center justify-center space-x-2">
-                                            <button
-                                                className="bg-blue-500 text-white font-semibold px-4 py-2 rounded hover:bg-blue-600"
+                                            <button className="cursor-pointer bg-blue-500 text-white font-semibold px-4 py-2 rounded hover:bg-blue-600"
                                                 onClick={() => handleEdit(category)}
                                             >
                                                 Edit
                                             </button>
                                             <button
-                                                className="bg-red-500 hover:bg-red-600 text-white font-semibold px-4 py-2 rounded"
+                                                className="cursor-pointer bg-red-500 hover:bg-red-600 text-white font-semibold px-4 py-2 rounded"
                                                 onClick={() => handleDelete(category)}
                                             >
                                                 Delete

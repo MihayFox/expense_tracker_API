@@ -112,7 +112,7 @@ const Products = () => {
             <div className="flex justify-between items-center mb-6">
                 <h1 className="text-2xl font-bold text-gray-800">Product Management</h1>
                 <button
-                    className="bg-blue-500 text-white font-semibold px-4 py-2 rounded hover:bg-blue-600"
+                    className="cursor-pointer bg-blue-500 text-white font-semibold px-4 py-2 rounded hover:bg-blue-600"
                     onClick={() => setOpenModal(true)}
                 >
                     Add Product
@@ -144,13 +144,13 @@ const Products = () => {
                                 <td className="py-2 px-4 text-center border border-gray-300">
                                     <div className="flex items-center justify-center space-x-2">
                                         <button
-                                            className="bg-blue-500 text-white font-semibold px-4 py-2 rounded hover:bg-blue-600"
+                                            className="cursor-pointer bg-blue-500 text-white font-semibold px-4 py-2 rounded hover:bg-blue-600"
                                             onClick={() => handleEdit(product)}
                                         >
                                             Edit
                                         </button>
                                         <button
-                                            className="bg-red-500 text-white font-semibold px-4 py-2 rounded hover:bg-red-600"
+                                            className="cursor-pointer bg-red-500 text-white font-semibold px-4 py-2 rounded hover:bg-red-600"
                                             onClick={() => handleDelete(product)}
                                         >
                                             Delete
@@ -169,7 +169,7 @@ const Products = () => {
                         <h2 className="text-xl font-bold mb-4 text-gray-800 text-center">{editProduct ? "Edit Product" : "Add New Product"}</h2>
                         <button
                             onClick={closeModal}
-                            className="absolute top-2 right-2 text-gray-600 text-2xl"
+                            className="cursor-pointer absolute top-2 right-2 text-gray-600 text-2xl"
                         >
                             X
                         </button>
@@ -251,14 +251,14 @@ const Products = () => {
                             <div className="flex gap-2 mt-4">
                                 <button
                                     type="submit"
-                                    className="flex-1 bg-green-500 hover:bg-green-600 text-white font-bold px-3 py-2 rounded"
+                                    className="cursor-pointer flex-1 bg-green-500 hover:bg-green-600 text-white font-bold px-3 py-2 rounded"
                                 >
                                     {editProduct ? "Save Changes" : "Add Product"}
                                 </button>
                                 <button
                                     type="button"
                                     onClick={closeModal}
-                                    className="flex-1 bg-gray-500 hover:bg-gray-600 text-white font-bold px-3 py-2 rounded"
+                                    className="cursor-pointer flex-1 bg-gray-500 hover:bg-gray-600 text-white font-bold px-3 py-2 rounded"
                                 >
                                     Cancel
                                 </button>

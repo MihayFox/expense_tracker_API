@@ -81,7 +81,7 @@ const UserProducts = () => {
 
                             <button
                                 onClick={() => handleAddToCart(product)}
-                                className="mt-auto bg-blue-500 text-white py-2 px-4 rounded hover:bg-blue-600 transition duration-200"
+                                className="cursor-pointer mt-auto bg-blue-500 text-white py-2 px-4 rounded hover:bg-blue-600 transition duration-200"
                             >
                                 Add to Cart
                             </button>
