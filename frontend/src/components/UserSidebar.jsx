@@ -1,14 +1,38 @@
 import React from 'react'
-import { NavLink } from 'react-router'
+import { NavLink } from 'react-router-dom'
 
 const UserSidebar = () => {
     const menuItems = [
-        { name: "Dashboard", path: "/user-dashboard", icon: "🏠" },
-        { name: "Products", path: "/user-dashboard/products", icon: "🛍️" },
-        { name: "My Orders", path: "/user-dashboard/orders", icon: "📜" },
-        { name: "My Profile", path: "/user-dashboard/profile", icon: "👤" },
-        { name: "Cart", path: "/user-dashboard/cart", icon: "🛒" },
-        { name: "Logout", path: "/user-dashboard/logout", icon: "➡️" },
+        {
+            name: "Dashboard",
+            path: "/user-dashboard",
+            icon: "🏠",
+        },
+        {
+            name: "Products",
+            path: "/user-dashboard/products",
+            icon: "🛍️",
+        },
+        {
+            name: "My Orders",
+            path: "/user-dashboard/orders",
+            icon: "📜",
+        },
+        {
+            name: "My Profile",
+            path: "/user-dashboard/profile",
+            icon: "👤",
+        },
+        {
+            name: "Cart",
+            path: "/user-dashboard/cart",
+            icon: "🛒",
+        },
+        {
+            name: "Logout",
+            path: "/user-dashboard/logout",
+            icon: "➡️",
+        },
     ];
 
     return (
@@ -25,12 +49,11 @@ const UserSidebar = () => {
                             <NavLink
                                 to={item.path}
                                 className={({ isActive }) =>
-                                    `flex items-center py-2 px-2 rounded transition duration-200 ${isActive ? 'bg-gray-700 text-white' : 'text-gray-300 hover:bg-gray-700 hover:text-white'
-                                    }`
+                                    `flex items-center py-2 px-2 rounded ${isActive ? 'bg-gray-700 text-white' : 'text-gray-300 hover:bg-gray-700 hover:text-white'}`
                                 }
                                 end={item.path === "/user-dashboard"}
                             >
-                                <span className="text-base mr-2">
+                                <span className="mr-2">
                                     {item.icon}
                                 </span>
                                 <span className="text-sm font-medium">

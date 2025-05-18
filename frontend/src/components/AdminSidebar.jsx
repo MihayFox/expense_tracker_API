@@ -53,12 +53,15 @@ const AdminSidebar = () => {
                         <li key={item.name}>
                             <NavLink
                                 to={item.path}
-                                className="flex items-center py-2 px-2 text-white rounded hover:bg-gray-700"
+                                className={({ isActive }) =>
+                                    `flex items-center py-2 px-2 rounded ${isActive ? 'bg-gray-700 text-white' : 'text-gray-300 hover:bg-gray-700 hover:text-white'}`
+                                }
+                                end={item.path === "/admin-dashboard"}
                             >
-                                <span className="text-base">
+                                <span className="mr-2">
                                     {item.icon}
                                 </span>
-                                <span className="ml-2 text-sm font-medium">
+                                <span className="text-sm font-medium">
                                     {item.name}
                                 </span>
                             </NavLink>
