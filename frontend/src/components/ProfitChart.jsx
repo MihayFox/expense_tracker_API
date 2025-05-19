@@ -19,7 +19,7 @@ const ProfitChart = ({ data, view }) => {
 
     return (
         <ResponsiveContainer height={400}>
-            <LineChart data={data} margin={{ right: 40, left: 60, bottom: 20 }}>
+            <LineChart data={data} margin={{ right: 40, left: 60, bottom: 20, top: 20 }}>
 
                 <CartesianGrid stroke={gridColor} />
                 <XAxis dataKey="name" label={{ value: xAxisLabel, position: "bottom" }} />
