@@ -3,8 +3,8 @@ import axios from 'axios'
 import ProfitChart from '../../components/ProfitChart'
 
 const AdminDashboard = () => {
-    const [orders, setOrders] = useState([])
-    // const [error, setError] = useState(null) // Error showing after 1-2 seconds, not looking good
+    const [orders, setOrders] = useState(null)
+    const [error, setError] = useState(null)
     const [view, setView] = useState('monthly') // "monthly" or "annually"
     const [chartData, setChartData] = useState({})
 
@@ -14,7 +14,7 @@ const AdminDashboard = () => {
                 const response = await axios.get("http://localhost:3000/api/orders/admin")
                 setOrders(response.data.orders)
             } catch (err) {
-                // setError("Failed to fetch orders") // error showing after 1-2 seconds, not looking good
+                setError("Failed to fetch orders")
                 setOrders([]) // Behave like no orders found
             }
         }
@@ -28,6 +28,9 @@ const AdminDashboard = () => {
     }, [orders, view])
 
     const processOrderData = (ordersToProcess, currentView) => {
+        if (orders === null) {
+            return
+        }
         // Filter the orders to only find the ones that generated profit
         const profitOrders = ordersToProcess.filter(order => order.status === 'Delivered' || order.status === 'Processing')
 
@@ -61,10 +64,12 @@ const AdminDashboard = () => {
         return formattedData
     }
 
-    // This shows after 1-2 seconds, not looking good
-    // if (error) {
-    //     return <div className="text-center text-xl py-10 text-red-500">{error}</div>
-    // }
+    if (orders === null) {
+        return <div className="text-center text-xl py-10 text-red-500">Loading...</div>
+    }
+    if (error) {
+        return <div className="text-center text-xl py-10 text-red-500">{error}</div>
+    }
 
     return (
         <div className="admin-dashboard-summary p-4">
