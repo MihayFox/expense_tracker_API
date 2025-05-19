@@ -5,37 +5,37 @@ const AdminSidebar = () => {
     const menuItems = [
         {
             name: "Dashboard",
-            path: "/admin-dashboard",
+            path: "/admin/dashboard",
             icon: "📊",
         },
         {
             name: "Categories",
-            path: "/admin-dashboard/categories",
+            path: "/admin/categories",
             icon: "📂",
         },
         {
             name: "Products",
-            path: "/admin-dashboard/products",
+            path: "/admin/products",
             icon: "📦",
         },
         {
             name: "Orders",
-            path: "/admin-dashboard/orders",
+            path: "/admin/orders",
             icon: "📋",
         },
         {
             name: "Active users",
-            path: "/admin-dashboard/users",
+            path: "/admin/users",
             icon: "👥",
         },
         {
             name: "Settings",
-            path: "/admin-dashboard/settings",
+            path: "/admin/settings",
             icon: "⚙️",
         },
         {
             name: "Logout",
-            path: "/admin-dashboard/logout",
+            path: "/admin/logout",
             icon: "➡️",
         },
     ]

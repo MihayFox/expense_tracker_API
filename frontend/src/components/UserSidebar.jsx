@@ -5,35 +5,35 @@ const UserSidebar = () => {
     const menuItems = [
         {
             name: "Dashboard",
-            path: "/user-dashboard",
+            path: "/user/dashboard",
             icon: "🏠",
         },
         {
             name: "Products",
-            path: "/user-dashboard/products",
+            path: "/user/products",
             icon: "🛍️",
         },
         {
             name: "My Orders",
-            path: "/user-dashboard/orders",
+            path: "/user/orders",
             icon: "📜",
         },
         {
             name: "My Profile",
-            path: "/user-dashboard/profile",
+            path: "/user/profile",
             icon: "👤",
         },
         {
             name: "Cart",
-            path: "/user-dashboard/cart",
+            path: "/user/cart",
             icon: "🛒",
         },
         {
             name: "Logout",
-            path: "/user-dashboard/logout",
+            path: "/user/logout",
             icon: "➡️",
         },
-    ];
+    ]
 
     return (
         <div className="flex flex-col h-screen p-4 bg-gray-800 text-white w-64 fixed">

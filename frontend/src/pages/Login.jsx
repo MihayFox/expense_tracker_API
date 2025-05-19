@@ -28,9 +28,9 @@ const Login = () => {
             if (response.data.success) {
                 await login(response.data.user, response.data.token)
                 if (response.data.user.role === "admin") {
-                    navigate("/admin-dashboard")
+                    navigate("/admin")
                 } else {
-                    navigate("/user-dashboard")
+                    navigate("/user")
                 }
             } else {
                 setError(
