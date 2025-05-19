@@ -20,12 +20,12 @@ export const CartProvider = ({ children }) => {
             updatedCartItems[existingItemIndex].quantity += quantity
             setCartItems(updatedCartItems)
         } else {
-            setCartItems([...cartItems, { product, quantity }]);
+            setCartItems([...cartItems, { product, quantity }])
         }
     }
 
     const removeItem = (productId) => {
-        setCartItems(cartItems.filter(item => item.product._id !== productId));
+        setCartItems(cartItems.filter(item => item.product._id !== productId))
     }
 
     const updateItemQuantity = (productId, newQuantity) => {

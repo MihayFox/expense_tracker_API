@@ -20,7 +20,7 @@ const addCategory = async (req, res) => {
         return res.status(201).json({ success: true, message: "Category added" })
 
     } catch (err) {
-        console.log("Error adding category:", err);
+        console.log("Error adding category:", err)
         return res.status(500).json({ success: false, message: "Error adding category" })
     }
 }

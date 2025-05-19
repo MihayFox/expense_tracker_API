@@ -7,7 +7,7 @@ const AdminOrders = () => {
     const [updateError, setUpdateError] = useState(null)
 
     // Possible order statuses
-    const possibleStatuses = ['Pending', 'Processing', 'Shipped', 'Delivered', 'Cancelled'];
+    const possibleStatuses = ['Pending', 'Processing', 'Shipped', 'Delivered', 'Cancelled']
 
     const fetchOrders = async () => {
         try {
@@ -44,7 +44,7 @@ const AdminOrders = () => {
                         'Content-Type': 'application/json',
                     },
                 }
-            );
+            )
 
             if (response.data.success) {
                 setOrders(prevOrders =>
@@ -59,7 +59,7 @@ const AdminOrders = () => {
 
         } catch (err) {
             console.error("Update status error:", err)
-            setUpdateError(`Failed to update status for order ${orderId}. Please try again.`);
+            setUpdateError(`Failed to update status for order ${orderId}. Please try again.`)
             fetchOrders()
         }
     }
