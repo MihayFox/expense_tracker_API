@@ -15,6 +15,7 @@ import AdminUsers from './pages/admin/AdminUsers'
 import AdminSettings from './pages/admin/AdminSettings'
 
 // User pages
+import UserLayout from './pages/user/UserLayout'
 import UserDashboard from './pages/user/UserDashboard'
 import UserProducts from './pages/user/UserProducts'
 import UserOrders from './pages/user/UserOrders'
@@ -51,15 +52,8 @@ function App() {
             <Route index element={<Navigate to="dashboard" replace />} />
           </Route>
 
-          <Route
-            path="/user"
-            element={
-              <CartProvider>
-                <UserDashboard />
-              </CartProvider>
-            }
-          >
-            <Route path="dashboard" element={<h1>User Dashboard Summarry</h1>} />
+          <Route path="/user" element={<CartProvider> <UserLayout /> </CartProvider>} >
+            <Route path="dashboard" element={<UserDashboard />} />
             <Route path="products" element={<UserProducts />} />
             <Route path="orders" element={<UserOrders />} />
             <Route path="profile" element={<UserProfile />} />

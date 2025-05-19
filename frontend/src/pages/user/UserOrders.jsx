@@ -78,7 +78,7 @@ const UserOrders = () => {
 
     return (
         <div className="p-6">
-            <h2 className="text-2xl font-bold mb-4">My Orders</h2>
+            <h2 className="text-2xl font-bold mb-4">My Orders ({orders.length})</h2>
 
             {orders.length === 0 ? (
                 <div>You haven't placed any orders yet.</div>

@@ -81,7 +81,7 @@ const getOrdersUser = async (req, res) => {
 
 
     try {
-        const orders = await Order.find({ user: userId }).populate('items.product', 'name imageUrl')
+        const orders = await Order.find({ user: userId }).populate('items.product', 'name price')
 
         res.status(200).json({ success: true, count: orders.length, orders })
 
