@@ -48,7 +48,7 @@ const UserCart = () => {
                 clearCart()
 
                 alert('Order placed successfully!')
-                navigate('/user-dashboard/orders')
+                navigate('/user/orders')
 
             } else {
                 setOrderError(response.data.message || 'Failed to place order')
@@ -74,7 +74,7 @@ const UserCart = () => {
             <h2 className="text-2xl font-bold mb-4">Your Shopping Cart</h2>
 
             {cartItems.length === 0 ? (
-                <div>Your cart is empty. <NavLink to="/user-dashboard/products" className="text-blue-600 hover:underline">Go add some products!</NavLink></div>
+                <div>Your cart is empty. <NavLink to="/user/products" className="text-blue-600 hover:underline">Go add some products!</NavLink></div>
             ) : (
                 <div>
                     <div className="space-y-4">
