@@ -1,14 +1,14 @@
-# expense_tracker_API
+# Inventory Manager
 
 Built with:
 - React
 - TailWind CSS
+- Express
 - Node.js
 - MongoDB
 
 TODO in the future:
 - auth middleware for protected routes (users can't access admin dashboard)
 - better UI for small screens (phones)
-- keep in database the products that were sold but then deleted from the database
 - password hashing
 - auto updating stock after order set on shipped
