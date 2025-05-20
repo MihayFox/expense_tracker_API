@@ -6,7 +6,7 @@ import Signup from "./pages/Signup"
 import Login from "./pages/Login"
 
 // Admin pages
-import AdminLayout from './pages/admin/AdminLayout' // Layout
+import AdminLayout from './layouts/AdminLayout' // Layout
 import AdminDashboard from './pages/admin/AdminDashboard' // Chart
 import AdminCategories from './pages/admin/AdminCategories'
 import AdminProducts from './pages/admin/AdminProducts'
@@ -15,7 +15,7 @@ import AdminUsers from './pages/admin/AdminUsers'
 import AdminSettings from './pages/admin/AdminSettings'
 
 // User pages
-import UserLayout from './pages/user/UserLayout'
+import UserLayout from './layouts/UserLayout'
 import UserDashboard from './pages/user/UserDashboard'
 import UserProducts from './pages/user/UserProducts'
 import UserOrders from './pages/user/UserOrders'
