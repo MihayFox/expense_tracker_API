@@ -15,13 +15,13 @@ const Homepage = () => {
                 < div className="flex gap-4 justify-center" >
                     < button
                         onClick={() => navigate("/login")}
-                        className="px-4 py-2 bg-blue-500 text-white text-base font-semibold rounded hover:bg-blue-600"
+                        className="cursor-pointer px-4 py-2 bg-blue-500 text-white text-base font-semibold rounded hover:bg-blue-600"
                     >
                         Login
                     </button >
                     < button
                         onClick={() => navigate("/signup")}
-                        className="px-4 py-2 bg-green-500 text-white text-base font-semibold rounded hover:bg-green-600"
+                        className="cursor-pointer px-4 py-2 bg-green-500 text-white text-base font-semibold rounded hover:bg-green-600"
                     >
                         Sign Up
                     </button >

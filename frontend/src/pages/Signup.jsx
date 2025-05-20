@@ -137,8 +137,7 @@ const Signup = () => {
                     <div className="flex items-center gap-7">
                         <button
                             type="submit"
-                            className={`bg-blue-500 hover:bg-blue-600 text-white font-bold py-2 px-4 rounded ${loading ? "opacity-50 cursor-not-allowed" : ""
-                                }`}
+                            className="cursor-pointer bg-blue-500 hover:bg-blue-600 text-white font-bold py-2 px-4 rounded"
                             disabled={loading}
                         >
                             {loading ? "Signing Up..." : "Sign Up"}
@@ -146,7 +145,7 @@ const Signup = () => {
                         <button
                             type="button"
                             onClick={() => navigate("/login")}
-                            className="font-bold text-sm text-blue-600"
+                            className="cursor-pointer font-bold text-sm text-blue-600"
                         >
                             Already have an account? Login
                         </button>

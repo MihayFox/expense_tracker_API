@@ -98,8 +98,7 @@ const Login = () => {
                     <div className="flex items-center gap-2">
                         <button
                             type="submit"
-                            className={`bg-blue-500 hover:bg-blue-600 text-white font-bold py-2 px-4 rounded ${loading ? "opacity-50 cursor-not-allowed" : ""
-                                }`}
+                            className="cursor-pointer bg-blue-500 hover:bg-blue-600 text-white font-bold py-2 px-4 rounded"
                             disabled={loading}
                         >
                             {loading ? "Logging In..." : "Login"}
@@ -107,7 +106,7 @@ const Login = () => {
                         <button
                             type="button"
                             onClick={() => navigate("/signup")}
-                            className="font-bold text-sm text-blue-600"
+                            className="cursor-pointer font-bold text-sm text-blue-600"
                         >
                             Don't have an account? Sign Up
                         </button>
