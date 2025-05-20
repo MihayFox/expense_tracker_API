@@ -1,7 +1,9 @@
 import axios from 'axios'
 import React, { useState, useEffect } from 'react'
+import { useAuth } from '../../context/authContext'
 
 const Users = () => {
+    const { user } = useAuth()
     const [formData, setFormData] = useState({
         name: "",
         email: "",
@@ -76,12 +78,19 @@ const Users = () => {
         }
     }
 
-    const handleDeleteUser = async (user) => {
-        if (!window.confirm(`Are you sure you want to delete user "${user.name}"?`)) return
+    const handleDeleteUser = async (targetUser) => {
+        if (targetUser.email == user.email) {
+            setErrorMessage("You can't delete your own admin account.")
+            return
+        }
+        if (!window.confirm(`Are you sure you want to delete user "${targetUser.name}"?`)) {
+            return
+        }
+
 
         try {
             const response = await axios.delete(
-                `http://localhost:3000/api/users/${user._id}`,
+                `http://localhost:3000/api/users/${targetUser._id}`,
                 {
                     headers: {
                         Authorization: `Bearer ${localStorage.getItem("token")}`,
