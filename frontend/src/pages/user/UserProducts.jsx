@@ -3,15 +3,13 @@ import { CartContext } from '../../context/cartContext'
 import axios from 'axios'
 
 const UserProducts = () => {
-    const [products, setProducts] = useState([])
-    const [loading, setLoading] = useState(true)
+    const [products, setProducts] = useState(null)
     const [error, setError] = useState(null)
 
     const { addItem } = useContext(CartContext)
 
     const fetchProducts = async () => {
         try {
-            setLoading(true)
             setError(null)
 
             const token = localStorage.getItem("token")
@@ -33,8 +31,6 @@ const UserProducts = () => {
             } else {
                 setError('An unexpected error occurred while setting up the request.')
             }
-        } finally {
-            setLoading(false)
         }
     }
 
@@ -47,11 +43,11 @@ const UserProducts = () => {
         alert(`${product.name} added to cart!`)
     }
 
-    if (loading) {
+    if (products === null) {
         return (
             <div className="p-6">
                 <h2 className="text-2xl font-bold mb-4">Available Products</h2>
-                <div>Loading products...</div>
+                <div className="text-red-500">Loading</div>
             </div>
         )
     }

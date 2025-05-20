@@ -5,18 +5,15 @@ import axios from 'axios'
 
 function UserDashboard() {
     const { user } = useAuth()
-    const cartContext = useContext(CartContext)
-    const addItem = cartContext ? cartContext.addItem : () => console.error('Cart context not available')
+    const { addItem } = useContext(CartContext)
 
-    const [orders, setOrders] = useState([])
+    const [orders, setOrders] = useState(null)
     const [frequentlyPurchased, setFrequentlyPurchased] = useState([])
-    const [loading, setLoading] = useState(true)
     const [error, setError] = useState(null)
 
     useEffect(() => {
         const fetchUserOrders = async () => {
             try {
-                setLoading(true)
                 setError(null)
                 const response = await axios.get(`http://localhost:3000/api/orders/user/${user.id}`, {
                     headers: {
@@ -32,20 +29,14 @@ function UserDashboard() {
 
             } catch (err) {
                 setError(err.response?.data?.message || err.message || 'Failed to fetch your orders. Please try again.')
-            } finally {
-                setLoading(false)
             }
         }
 
-        if (user?.id) {
-            fetchUserOrders()
-        } else {
-            setLoading(false)
-        }
-    }, [user?.id])
+        fetchUserOrders()
+    }, [user.id])
 
     useEffect(() => {
-        if (orders.length > 0) {
+        if (orders && orders.length > 0) {
             const productCounts = {}
 
             orders.forEach(order => {
@@ -72,10 +63,8 @@ function UserDashboard() {
 
             const topN = 5
             setFrequentlyPurchased(sortedProducts.slice(0, topN))
-        } else if (!loading) {
-            setFrequentlyPurchased([])
         }
-    }, [orders, loading])
+    }, [orders])
 
     const handleAddToCart = (product) => {
         if (addItem) {
@@ -86,12 +75,11 @@ function UserDashboard() {
         }
     }
 
-
-    if (loading) {
+    if (orders === null) {
         return (
             <div className="p-6">
-                <h2 className="text-2xl font-bold mb-4">Dashboard</h2>
-                <div>Loading dashboard data...</div>
+                <h2 className="text-2xl font-bold mb-4">Frequently Purchased Items</h2>
+                <div className="text-red-500">Loading</div>
             </div>
         )
     }
@@ -99,17 +87,8 @@ function UserDashboard() {
     if (error) {
         return (
             <div className="p-6">
-                <h2 className="text-2xl font-bold mb-4">Dashboard</h2>
+                <h2 className="text-2xl font-bold mb-4">Frequently Purchased Items</h2>
                 <div className="text-red-500">Error: {error}</div>
-            </div>
-        )
-    }
-
-    if (!user) {
-        return (
-            <div className="p-6">
-                <h2 className="text-2xl font-bold mb-4">Dashboard</h2>
-                <div>Please log in to view your dashboard.</div>
             </div>
         )
     }

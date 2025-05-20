@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react'
 import axios from 'axios'
 
 const AdminOrders = () => {
-    const [orders, setOrders] = useState([])
+    const [orders, setOrders] = useState(null)
     const [error, setError] = useState(null)
     const [updateError, setUpdateError] = useState(null)
 
@@ -68,6 +68,15 @@ const AdminOrders = () => {
     useEffect(() => {
         fetchOrders()
     }, [])
+
+    if (orders === null) {
+        return (
+            <div className="p-6">
+                <h2 className="text-2xl font-bold mb-4">Orders</h2>
+                <div className="text-red-500">Loading</div>
+            </div>
+        )
+    }
 
     if (error) {
         return (

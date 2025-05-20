@@ -6,13 +6,11 @@ const UserOrders = () => {
     const { user } = useAuth()
     const userId = user.id
 
-    const [orders, setOrders] = useState([])
-    const [loading, setLoading] = useState(true)
+    const [orders, setOrders] = useState(null)
     const [error, setError] = useState(null)
 
     const fetchUserOrders = async (id) => {
         try {
-            setLoading(true)
             setError(null)
 
             const response = await axios.get(`http://localhost:3000/api/orders/user/${id}`, {
@@ -36,24 +34,18 @@ const UserOrders = () => {
             } else {
                 setError('An unexpected error occurred while setting up the request.')
             }
-        } finally {
-            setLoading(false)
         }
     }
 
     useEffect(() => {
-        if (userId) {
-            fetchUserOrders(userId)
-        } else {
-            setLoading(false)
-        }
+        fetchUserOrders(userId)
     }, [userId, user])
 
-    if (loading && !userId) {
+    if (orders === null) {
         return (
             <div className="p-6">
                 <h2 className="text-2xl font-bold mb-4">My Orders</h2>
-                <div>Loading user data...</div>
+                <div className="text-red-500">Loading</div>
             </div>
         )
     }
@@ -63,15 +55,6 @@ const UserOrders = () => {
             <div className="p-6">
                 <h2 className="text-2xl font-bold mb-4">My Orders</h2>
                 <div className="text-red-500">Error: {error}</div>
-            </div>
-        )
-    }
-
-    if (!userId) {
-        return (
-            <div className="p-6">
-                <h2 className="text-2xl font-bold mb-4">My Orders</h2>
-                <div className="text-red-500">Error: User not logged in.</div>
             </div>
         )
     }
